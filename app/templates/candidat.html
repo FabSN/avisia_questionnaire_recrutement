@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+</br>
+<h1>Bonjour {{prenom_candidat}} {{nom_candidat}}</h1>
+</br>
+  <div id="table_container_player">
+    <div class="container">
+    <br>
+    <table>
+	<FORM id="myform_question" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
+
+		{% for id in section_choix %}
+		<tr>
+			<td>
+				<button type="submit" name="choix_questionnaire" value="{{df_section[df_section['id_section']==id]['id_section'].values[0]}}">{{df_section[df_section['id_section']==id]['libelle_section'].values[0]}}</button>
+			</td>
+		</tr>
+		{% endfor %}
+	</FORM>
+    </table>
+	</div>
+  </div>
+{% endblock %}

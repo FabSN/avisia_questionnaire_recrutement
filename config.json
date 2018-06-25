@@ -1,0 +1,5 @@
+{
+	"database":{
+		"prod":"data/database/mysql_database.db"
+	}
+}
