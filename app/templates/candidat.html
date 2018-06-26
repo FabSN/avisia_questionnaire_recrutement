@@ -1,19 +1,25 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-</br>
-<h1>Bonjour {{prenom_candidat}} {{nom_candidat}}</h1>
-</br>
-  <div id="table_container_player">
-    <div class="container">
-    <br>
-    <table>
+
+	<table id="table_header">
+		<tr>
+			<td>
+  				<h1>Bonjour {{prenom_candidat}} {{nom_candidat}}</h1>
+			</td>
+		</tr>
+	</table>
+
+
+  <div id="table_container">
+  <table id="table_container">
+
 	<FORM id="myform_question" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
 
 		{% for id in section_choix %}
 		<tr>
 			<td>
-				<button type="submit" name="choix_questionnaire" value="{{df_section[df_section['id_section']==id]['id_section'].values[0]}}">{{df_section[df_section['id_section']==id]['libelle_section'].values[0]}}</button>
+				<button class="button" type="submit" name="choix_questionnaire" value="{{df_section[df_section['id_section']==id]['id_section'].values[0]}}">{{df_section[df_section['id_section']==id]['libelle_section'].values[0]}}</button>
 			</td>
 		</tr>
 		{% endfor %}
@@ -25,15 +31,9 @@
 
 	</FORM>
     </table>
-	</div>
-  </div>
+    </div>
 
-<footer id="footer">
-  	<table id="footer">
-		<tr id="tr_footer">
-  			<td id="td_footer"><h3><a href="{{ url_for('index') }}"><img src="static/img/retour.png" style="width:30px;height:30px; margin: 0 15px 0 0;">Retour</a></h3></td>
- 		</tr>
- 	</table>
-</footer>
+	<a href="{{ url_for('index') }}"><button class="button retour"><span>Retour</span></button></a></td>
+
 
 {% endblock %}

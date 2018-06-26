@@ -8,28 +8,31 @@
 
 {% block body %}
 
+	<table id="table_header">
+		<tr>
+			<td>
+  				<h1>Question {{json_question['ref_id_section']}}</h1>
+			</td>
+		</tr>
+	</table>
 
-			</br>
-				<h1>Question {{json_question['ref_id_section']}}</h1>
-			</br>
-
-
-<table id="table_base">
- 	<tr id="tr_vide">
- 		</tr>
-		<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=json_question['id_question'])}}">
-
-			  		<td><div id="classement_container">
-
-					<input type="text" name="libelle_question" value="{{ json_question['libelle_question'] }}" readonly>
-					<input type="text" name="id_question" value="{{json_question['id_question']}}" readonly>
-					<input type="text" name="id_section" value="{{json_question['ref_id_section']}}" readonly>
+	<div id="table_container">
+  	<table id="table_container">
+  	<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=json_question['id_question'])}}">
+  		
+  		<tr>
+				<td>
+					<div id="classement_container">
+						<input type="text" name="libelle_question" value="{{ json_question['libelle_question'] }}" readonly>
+						<input type="text" name="id_question" value="{{json_question['id_question']}}" readonly>
+						<input type="text" name="id_section" value="{{json_question['ref_id_section']}}" readonly>
 					</div>
-					</td>
-
-
-
-				<fieldset>
+				</td>
+		</tr>
+  		
+  		<tr>
+			<td>
+  				<fieldset>
 				{% for id in json_question['liste_reponses_questions'].keys() %}
 						{% if id == reponse_candidat_html %}
 							<input type="radio" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
@@ -40,11 +43,17 @@
 
 
 				{% endfor %}
-			</fieldset>
+				</fieldset>
+			</td>
+		</tr>
+	
+    </table>
+    </div>
 
-			<h3><input type="submit" form="myform"/></h3>
-		</FORM>
- </table>
+	<a href="{{ url_for('index') }}"><button class="button retour"><span>Retour</span></button></a></td>
+	<button class="button valider"><span><input type="submit" form="myform"/></span></button>
+
+	</FORM>	
 
 {% endblock %}
 

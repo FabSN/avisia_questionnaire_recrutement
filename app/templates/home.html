@@ -1,34 +1,57 @@
 {% extends 'layout.html' %}
 
-{% block body %}
-  	</br>
-  	<h1>La gamelle connectée</h1>
-	<img src="static/img/avisia.png" style="width:150px;height:25px; margin-left:60%; align:center;">
-    
-    <table id="table_base" style="margin-top:10%;">
-    <tr>
-    <td></td>
-    <td>
-		<FORM id="myform" METHOD="POST" action="{{ url_for('candidat')}}">
-			<h2 style="font-size:30px;">Nom : </h2>
-			<input type="text" id="uname" name="nom_candidat">
-			</BR>
-			<h2 style="font-size:30px;">Prénom : </h2>
-			<input type="text" id="uname" name="prenom_candidat">
-			</BR>
-			</BR>
-			<fieldset>
-				{% for id in section_table.index %}
-					<input type="checkbox" id="coding" name="section_choix" value="{{section_table.loc[id].id_section}}">
-				<label for="coding"><h2 style="font-size:30px;">{{section_table.loc[id].libelle_section}}</h2></label></BR>
-				{% endfor %}
-			</fieldset>
 
-    		<button><img src="static/img/start.png" style="width:300px;height:300px; margin:auto;"></button>
-		</FORM>
-	</td>
-  	</tr>
-  	</table>
+
+{% block body %}
+	<table id="table_header">
+		<tr>
+			<td>
+  				<h1>Quiz de compétences</h1>
+				<img src="static/img/avisia.png" style="width:150px;height:25px; margin-left:60%; align:center;">
+			</td>
+		</tr>
+	</table>
+    
+    <FORM id="myform" METHOD="POST" action="{{ url_for('candidat')}}">
+    <table>
+    	<tr>
+    		<td>
+    		<h2>Prénom </h2>
+    		</td>
+    		<td>
+    		<h2>Nom </h2>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>
+    		<input type="text" id="uname" name="nom_candidat">
+    		</td>
+    		<td>
+    		<input type="text" id="uname" name="prenom_candidat">
+    		</td>
+   		</tr>
+	</table>
+	
+	<table id="table_choix">
+    	<tr>
+    		<td>
+				<fieldset>
+					</br>
+					{% for id in section_table.index %}
+						<input type="checkbox" id="coding" name="section_choix" value="{{section_table.loc[id].id_section}}">
+						<label for="coding"  style="width:150px;"><p>{{section_table.loc[id].libelle_section}}</p ></label>
+					{% endfor %}
+					</br>
+				</fieldset>
+			</td>
+		</tr>
+	</table>
+
+    <button class="button valider"><span>Valider</span></button>
+    
+	
+	</FORM>	
+
   
 
 {% endblock %}
