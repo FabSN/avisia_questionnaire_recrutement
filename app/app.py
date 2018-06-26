@@ -8,6 +8,7 @@ import datetime
 import logging as lg
 import pandas as pd
 import requests
+import json
 
 # Custom package
 import sys
@@ -73,24 +74,20 @@ def lancement_questionnaire():
         # Recuperation de la liste des sessions dans un dataframe a partir de la variable session
         df_sections_v2=pd.read_json(session['dataframe_section'], orient='records')
 
-        # Lancement de la bonne page
-        for i,liste in df_sections_v2.iterrows():
-            print i
-            if launch_questionnaire==liste['id_section']:
-                if launch_questionnaire=='r001':
-                    return redirect('http://google.fr')
-                else:
-                    return redirect('http://lequipe.fr')
+        return redirect(url_for('question',id_question=launch_questionnaire+'_001'))
     else:
         return redirect(url_for('index'))
 
 
-#@app.route('/player/<int:id_player>/')
-#def player(id_player):
-#    players_table = interaction_database_app.get_players().set_index('id_player')
-#    players_stat = interaction_database_app.recup_players_stat()
-#    return render_template('player.html', players_table = players_stat, id_player=id_player)
+@app.route('/question/<string:id_question>/', methods=['GET', 'POST'])
+def question(id_question):
+    if request.method == 'GET':
+        lg.info("lancement de la question "+id_question)
+        json_question_app = interaction_database_app.get_question(id_question)
+        return render_template('question.html', json_question= json_question_app)
+    elif request.method == 'POST':
 
+        return render_template('question.html', json_question=json_question_app)
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'

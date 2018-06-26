@@ -3,66 +3,26 @@
 {% block body %}
 
 </br>
-<h1>Profil de {{players_table.loc[id_player].firstname}}</h1>
+<h1>Question {{json_question_app['ref_id_section']}}</h1>
 </br>
 
 
 <table id="table_base">
  	<tr id="tr_vide">
-  		<td><h2>Classement</h2><div id="classement_container"><div id="classement"># {{ players_table.loc[id_player].ranking }}</div></div></td>
-  		<td><h2># Matchs</h2><div id="classement_container"><div id="classement">{{ players_table.loc[id_player].match_count }}</div></div></td>
- 		<td><h2># Victoires</h2><div id="classement_container"><div id="classement">{{ players_table.loc[id_player].match_win_percent }} %</div></div></td>
+  		<td><div id="classement_container">
+			 {{ json_question_app['libelle_question'] }}</div>
+		</td>
  		</tr>
+		<FORM id="myform" METHOD="POST" action="{{ url_for('candidat')}}">
+
+				<fieldset>
+				{% for id in section_table.index %}
+					<input type="checkbox" id="coding" name="section_choix" value="{{section_table.loc[id].id_section}}">
+				<label for="coding"><h2 style="font-size:30px;">{{section_table.loc[id].libelle_section}}</h2></label></BR>
+				{% endfor %}
+			</fieldset>
+
  </table>
-
-<table id="table_player">
-	<tr>
-		<td id="emojis">
-			<h3 style="color:#303030; font-size:30px">Adore jouer avec</h3>
-		</td>
-		<td id="emojis" >
-			<h3 style="color:#303030;font-size:30px">Pas la peine de jouer avec</h3>
-		</td>
-		<td id="emojis">
-			<h3 style="color:#303030;font-size:30px">Ridiculise</h3>
-		</td>
-		<td id="emojis">
-			<h3 style="color:#303030;font-size:30px">A peur de</h3>
-		</td>
-	</tr>
-	<tr>
-		<td id="emojis">
-			<img src="/static/img/part_best.png" style="width:170px;height:170px; margin: 0;">
-		</td>
-		<td id="emojis">
-			<img src="/static/img/part_pire.png" style="width:170px;height:170px; margin: 0;">
-		</td>
-		<td id="emojis">
-			<img src="/static/img/adv_best.png" style="width:170px;height:170px; margin: 0;">
-		</td>
-		<td id="emojis">
-			<img src="/static/img/adv_pire.png" style="width:170px;height:170px; margin: 0;">
-		</td>
-	</tr>
-	<tr>
-		<td id="emojis">
-			<h2 style="color:#303030;">{{players_table.loc[id_player].firstname_best_partner}} </br> {{players_table.loc[id_player].lastname_best_partner}}</h2>
-		</td>
-		<td id="emojis">
-			<h2 style="color:#303030;">{{players_table.loc[id_player].firstname_bad_partner}} </br> {{players_table.loc[id_player].lastname_bad_partner}}</h2>
-		</td>
-		<td id="emojis">
-			<h2 style="color:#303030;">{{players_table.loc[id_player].firstname_best_adver}} </br> {{players_table.loc[id_player].lastname_best_adver}}</h2>
-		</td>
-		<td id="emojis">
-			<h2 style="color:#303030;">{{players_table.loc[id_player].firstname_bad_adver}} </br> {{players_table.loc[id_player].lastname_bad_adver}}</h2>
-		</td>
-	</tr>
-</table>
-
-
-
-
 
 
 <footer id="footer">

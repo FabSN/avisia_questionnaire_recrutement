@@ -8,6 +8,8 @@ import pandas as pd
 import datetime
 import time
 import logging as lg
+import ast
+
 import json
 
 
@@ -31,6 +33,15 @@ def stockage_candidat(nom,prenom,section):
     lg.info('AJOUT DU CANDIDAT')
     return id_candidat
 
+def get_question(id):
+    id='py001_001'
+    cur, conn = fonction_database.fonction_connexion_sqllite()
+    df_question=pd.read_sql("SELECT * FROM ref_questions WHERE id_question = '{}';".format(id),conn)
+    fonction_database.fonction_connexion_sqllite_fermeture(cur,conn)
+    json_question=df_question.loc[0].to_json()
+    json_question=ast.literal_eval(json_question)
+    json_question['liste_reponses_questions']=ast.literal_eval(json_question['liste_reponses_questions'])
+    return json_question
 
 def getData():
     try:
