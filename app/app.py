@@ -40,6 +40,9 @@ def index():
     # Stockage dans une variable de session
     session['dataframe_section']=df_sections.to_json(orient='records')
     session['id_candidat']=''
+    session['nom_candidat'] = ''
+    session['prenom_candidat'] = ''
+    session['section_choix'] = ''
     # Home
     return render_template('home.html', section_table=df_sections)
 
@@ -50,8 +53,11 @@ def candidat():
     if request.method == 'POST':
         # Recuperation des variables
         nom_candidat = request.form.get('nom_candidat')
+        session['nom_candidat']=nom_candidat
         prenom_candidat = request.form.get('prenom_candidat')
+        session['prenom_candidat'] = prenom_candidat
         section_choix = request.form.getlist('section_choix')
+        session['section_choix'] = section_choix
         # Recuperation de la liste des sessions dans un dataframe a partir de la variable session
         df_sections_v2=pd.read_json(session['dataframe_section'], orient='records')
 
@@ -60,8 +66,16 @@ def candidat():
         lg.info('VALEUR ID : {}'.format(session['id_candidat']))
         lg.info('SECTION CHOIX : {}'.format(section_choix))
         return render_template('candidat.html', nom_candidat=nom_candidat,prenom_candidat=prenom_candidat,section_choix=section_choix,df_section=df_sections_v2)
+
+    elif request.method == 'GET' and session['id_candidat']<>'':
+        df_sections_v2 = pd.read_json(session['dataframe_section'], orient='records')
+        return render_template('candidat.html', nom_candidat=session['nom_candidat']
+                                              , prenom_candidat=session['prenom_candidat']
+                                              ,section_choix=session['section_choix']
+                                              , df_section=df_sections_v2)
     else:
         return redirect(url_for('index'))
+
 
 ''' Page lancement_questionnaire'''
 @app.route('/lancement_questionnaire', methods=['GET', 'POST'])
@@ -70,10 +84,6 @@ def lancement_questionnaire():
     if request.method == 'POST':
         # Recuperation des variables
         launch_questionnaire = request.form.get('choix_questionnaire')
-        print launch_questionnaire
-        # Recuperation de la liste des sessions dans un dataframe a partir de la variable session
-        df_sections_v2=pd.read_json(session['dataframe_section'], orient='records')
-
         return redirect(url_for('question',id_question=launch_questionnaire+'_001'))
     else:
         return redirect(url_for('index'))
@@ -81,13 +91,37 @@ def lancement_questionnaire():
 
 @app.route('/question/<string:id_question>/', methods=['GET', 'POST'])
 def question(id_question):
-    if request.method == 'GET':
+    # On arrive avec un GET depuis la page candidat
+    if request.method == 'GET' and session['id_candidat']<>'':
         lg.info("lancement de la question "+id_question)
+        # Recupération de la question
         json_question_app = interaction_database_app.get_question(id_question)
-        return render_template('question.html', json_question= json_question_app)
-    elif request.method == 'POST':
 
-        return render_template('question.html', json_question=json_question_app)
+        # Recuperation de la reponse du candidat si il y en a une
+        reponse_candidat_app=interaction_database_app.get_reponse_question(id_question=id_question,id_candidat=session['id_candidat'])
+        print "reponse "+str(reponse_candidat_app)
+        return render_template('question.html', json_question= json_question_app,reponse_candidat_html=str(reponse_candidat_app))
+
+    elif request.method == 'GET' and session['id_candidat'] == '':
+        return redirect(url_for('index'))
+    # On arrive avec un POST quand il y a validation de la question
+    elif request.method == 'POST':
+        # Insertion de la réponse
+        interaction_database_app.insert_or_update_reponse_question(id_question=request.form.get('id_question')
+                                                       , reponse_question_candidat=request.form.get('choix_reponse')
+                                                       , id_candidat=session['id_candidat'][0])
+
+        # Recherche si il y a une question suivante dans la partie
+        flag_question_suivante=interaction_database_app.check_question_suivante(section_recherche=request.form.get('id_section')
+                                                        ,question_en_cours=request.form.get('id_question'))
+
+        if flag_question_suivante==1:
+            # Calcul de l'id de la question suivante
+            question_en_cours=request.form.get('id_question')
+            question_suivante = question_en_cours.split('_')[0] + '_' + '{0:03}'.format(int(question_en_cours.split('_')[1]) + 1)
+            return redirect(url_for('question',id_question=question_suivante))
+        else:
+            return redirect(url_for('candidat'))
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'

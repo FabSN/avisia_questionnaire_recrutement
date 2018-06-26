@@ -8,28 +8,43 @@
 
 {% block body %}
 
-</br>
-<h1>Question {{json_question['ref_id_section']}}</h1>
-</br>
+
+			</br>
+				<h1>Question {{json_question['ref_id_section']}}</h1>
+			</br>
 
 
 <table id="table_base">
  	<tr id="tr_vide">
-  		<td><div id="classement_container">
-			 {{ json_question['libelle_question'] }}</div>
-		</td>
  		</tr>
 		<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=json_question['id_question'])}}">
+
+			  		<td><div id="classement_container">
+
+					<input type="text" name="libelle_question" value="{{ json_question['libelle_question'] }}" readonly>
+					<input type="text" name="id_question" value="{{json_question['id_question']}}" readonly>
+					<input type="text" name="id_section" value="{{json_question['ref_id_section']}}" readonly>
+					</div>
+					</td>
+
+
+
 				<fieldset>
 				{% for id in json_question['liste_reponses_questions'].keys() %}
-					<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}">
-				<label for="coding"><h2 style="font-size:30px;">{{json_question['liste_reponses_questions'][id]}}</h2></label></BR>
+						{% if id == reponse_candidat_html %}
+							<input type="radio" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
+						{% else %}
+							<input type="radio" id="coding" name="choix_reponse" value="{{id}}">
+						{% endif %}
+						<label for="coding"><h2 style="font-size:30px;">{{json_question['liste_reponses_questions'][id]}}</h2></label></BR>
+
+
 				{% endfor %}
 			</fieldset>
 
+			<h3><input type="submit" form="myform"/></h3>
+		</FORM>
  </table>
-
-
 
 {% endblock %}
 
