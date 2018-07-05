@@ -43,7 +43,7 @@ def CreateTable():
     requete.execute('''CREATE TABLE IF NOT EXISTS `candidats_en_cours` ( `id_candidat` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `prenom_candidat` TEXT NOT NULL, `nom_candidat` TEXT NOT NULL, `section_candidat` TEXT NOT NULL )''')
     # Table des réponses à chaque question du candidat en cours
     requete.execute('''DROP TABLE IF EXISTS candidats_reponses_questions;''')
-    requete.execute('''CREATE TABLE IF NOT EXISTS `candidats_reponses_questions` ( `id_reponse` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `foreign_id_candidat` INTEGER NOT NULL, `foreign_id_question` INTEGER NOT NULL, `reponse_question_candidat` INTEGER, FOREIGN KEY(`foreign_id_question`) REFERENCES `ref_questions`(`id_question`), FOREIGN KEY(`foreign_id_candidat`) REFERENCES `candidats_en_cours`(`id_candidat`))''')
+    requete.execute('''CREATE TABLE IF NOT EXISTS `candidats_reponses_questions` ( `id_reponse` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `foreign_id_candidat` INTEGER NOT NULL, `foreign_id_question` INTEGER NOT NULL, `reponse_question_candidat` TEXT, FOREIGN KEY(`foreign_id_question`) REFERENCES `ref_questions`(`id_question`), FOREIGN KEY(`foreign_id_candidat`) REFERENCES `candidats_en_cours`(`id_candidat`))''')
 
 
     # Referentiel des questions

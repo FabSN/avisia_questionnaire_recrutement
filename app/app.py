@@ -106,7 +106,16 @@ def question(id_question):
         return redirect(url_for('index'))
     # On arrive avec un POST quand il y a validation de la question
     elif request.method == 'POST':
-        # Insertion de la réponse
+
+        ##  Insertion de la réponse
+        # différent si il s'agit d'uncheckbox ou d'un button
+        if len(request.form.getlist('choix_reponse'))>1:
+            reponse=request.form.getlist('choix_reponse')
+            reponse="&".join(reponse)
+            print reponse
+        else:
+            request.form.get('choix_reponse')
+
         interaction_database_app.insert_or_update_reponse_question(id_question=request.form.get('id_question')
                                                        , reponse_question_candidat=request.form.get('choix_reponse')
                                                        , id_candidat=session['id_candidat'][0])
@@ -122,6 +131,29 @@ def question(id_question):
             return redirect(url_for('question',id_question=question_suivante))
         else:
             return redirect(url_for('candidat'))
+
+
+''' Page ajout_question'''
+@app.route('/ajout_question', methods=['GET', 'POST'])
+def ajout_question():
+    # On arrive depuis la page Home
+    if request.method == 'POST':
+        # Recuperation des variables
+        section_choix = request.form.get('section_choix')
+        libelle_question = request.form.get('libelle_question')
+        type_question=request.form.get('type_question')
+        reponse1=request.form.get('reponse1')
+        reponse2=request.form.get('reponse2')
+        reponse3=request.form.get('reponse3')
+        reponse4=request.form.get('reponse4')
+
+        statut=interaction_database_app.insert_question(section_choix,libelle_question,type_question,reponse1,reponse2,reponse3,reponse4)
+
+        df_sections = interaction_database_app.get_section()
+        return render_template('ajout_question.html', section_table=df_sections)
+    else:
+        df_sections = interaction_database_app.get_section()
+        return render_template('ajout_question.html',section_table=df_sections)
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'

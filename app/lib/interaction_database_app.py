@@ -9,7 +9,6 @@ import datetime
 import time
 import logging as lg
 import ast
-
 import json
 
 
@@ -33,13 +32,26 @@ def stockage_candidat(nom,prenom,section):
     lg.info('AJOUT DU CANDIDAT')
     return id_candidat
 
+def encoding_modif_html(var):
+    return var.replace('\\u00e9','&eacute;')
+
 def get_question(id):
     cur, conn = fonction_database.fonction_connexion_sqllite()
     df_question=pd.read_sql("SELECT * FROM ref_questions WHERE id_question = '{}';".format(id),conn)
     fonction_database.fonction_connexion_sqllite_fermeture(cur,conn)
+    # Si pas de réponse bonne alors null
+    df_question['bonne_reponse_question']=df_question['bonne_reponse_question'].apply(lambda x : 99 if x is None else x)
     json_question=df_question.loc[0].to_json()
     json_question=ast.literal_eval(json_question)
     json_question['liste_reponses_questions']=ast.literal_eval(json_question['liste_reponses_questions'])
+
+    json_question['libelle_question']=encoding_modif_html(json_question['libelle_question'])
+
+    for i in json_question['liste_reponses_questions'].keys():
+        json_question['liste_reponses_questions'][i]=json_question['liste_reponses_questions'][i].replace('\n','<br>')
+        json_question['liste_reponses_questions'][i]=encoding_modif_html(json_question['liste_reponses_questions'][i])
+
+
     return json_question
 
 def insert_or_update_reponse_question(id_question, reponse_question_candidat, id_candidat):
@@ -55,11 +67,11 @@ def insert_or_update_reponse_question(id_question, reponse_question_candidat, id
     # Alors il faut faire un update de la réponse
     if number_of_rows==1:
         cur, conn = fonction_database.fonction_connexion_sqllite()
-        cur.execute("UPDATE candidats_reponses_questions SET reponse_question_candidat={} WHERE foreign_id_candidat={} AND foreign_id_question='{}';".format(int(reponse_question_candidat),int(id_candidat), str(id_question)))
+        cur.execute("UPDATE candidats_reponses_questions SET reponse_question_candidat='{}' WHERE foreign_id_candidat={} AND foreign_id_question='{}';".format(str(reponse_question_candidat),int(id_candidat), str(id_question)))
         fonction_database.fonction_connexion_sqllite_fermeture(cur,conn)
     else:
         cur, conn = fonction_database.fonction_connexion_sqllite()
-        cur.execute("INSERT INTO candidats_reponses_questions(foreign_id_candidat,foreign_id_question,reponse_question_candidat) VALUES((?), (?),(?));", (int(id_candidat), str(id_question),int(reponse_question_candidat)))
+        cur.execute("INSERT INTO candidats_reponses_questions(foreign_id_candidat,foreign_id_question,reponse_question_candidat) VALUES((?), (?),(?));", (int(id_candidat), str(id_question),str(reponse_question_candidat)))
         fonction_database.fonction_connexion_sqllite_fermeture(cur,conn)
 
     return 'ok'
@@ -98,8 +110,39 @@ def get_reponse_question(id_question,id_candidat):
         cur.execute(query)
         result = cur.fetchone()
         reponse_candidat = result[0]
+        reponse_candidat=str(reponse_candidat).split('&')
         fonction_database.fonction_connexion_sqllite_fermeture(cur, conn)
     else:
         reponse_candidat=9999
 
     return reponse_candidat
+
+
+
+''' Ajouter une question'''
+def insert_question(section_choix, libelle_question, type_question,reponse1,reponse2,reponse3,reponse4):
+    # On récupère les id des questions de la section
+    cur, conn = fonction_database.fonction_connexion_sqllite()
+    query = "SELECT * FROM ref_questions WHERE ref_id_section = '{}';".format(section_choix)
+    liste_questions=pd.read_sql(query, conn)
+    fonction_database.fonction_connexion_sqllite_fermeture(cur, conn)
+
+    # Si il y a deja des questions
+    if liste_questions.shape[0]>0:
+        liste_questions['id_question_next']=liste_questions['id_question'].apply(lambda x : int(x.split('_')[-1]))
+        question_suivante=section_choix+'_'+'{0:03}'.format(liste_questions['id_question_next'].max()+1)
+    else:
+        question_suivante = section_choix + '_' + '{0:03}'.format(1)
+
+    dict_reponses={}
+    dict_reponses["1"] = reponse1
+    dict_reponses["2"] = reponse2
+    dict_reponses["3"] = reponse3
+    dict_reponses["4"] = reponse4
+
+    json_reponses=json.dumps(dict_reponses)
+    cur, conn = fonction_database.fonction_connexion_sqllite()
+    cur.execute("INSERT INTO ref_questions(id_question,ref_id_section,libelle_question,type_formulaire_question,liste_reponses_questions) VALUES((?), (?),(?), (?),(?));", (question_suivante, section_choix,libelle_question,type_question,json_reponses))
+    fonction_database.fonction_connexion_sqllite_fermeture(cur,conn)
+
+    return 'ok'

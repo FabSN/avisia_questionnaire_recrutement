@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends 'layout.html' %}</title>
+</head>
+<body>
+
+{% block body %}
+
+	<table id="table_header">
+		<tr>
+			<td>
+  				<h1>Ajout d'une question</h1>
+			</td>
+		</tr>
+	</table>
+
+	<div id="table_container">
+  	<table id="table_container">
+  	<FORM id="myform" METHOD="POST" action="{{url_for('ajout_question')}}">
+    	<tr>
+    		<td>
+				<fieldset>
+					</br>
+					{% for id in section_table.index %}
+						<input type="radio" id="coding" name="section_choix" value="{{section_table.loc[id].id_section}}">
+						<label for="coding"  style="width:150px;"><p>{{section_table.loc[id].libelle_section}}</p ></label>
+					{% endfor %}
+					</br>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+    		<td>
+    		<input type="text" id="uname" name="libelle_question">
+    		</td>
+   		</tr>
+    	<tr>
+    		<td>
+				<fieldset>
+					</br>
+						<input type="radio" id="coding" name="type_question" value="text">
+						<label for="coding"  style="width:150px;"><p>Type text</p ></label>
+						<input type="radio" id="coding" name="type_question" value="button">
+						<label for="coding"  style="width:150px;"><p>Type button</p ></label>
+						<input type="radio" id="coding" name="type_question" value="checkbox">
+						<label for="coding"  style="width:150px;"><p>Type checkbox</p ></label>
+					</br>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+    		<td>
+				<textarea name="reponse1" form="myform" rows="10" cols="100"></textarea>
+    		</td>
+   		</tr>
+		<tr>
+    		<td>
+				<textarea name="reponse2" form="myform" rows="10" cols="100"></textarea>
+    		</td>
+   		</tr>
+		<tr>
+    		<td>
+    			<textarea name="reponse3" form="myform" rows="10" cols="100"></textarea>
+    		</td>
+   		</tr>
+		<tr>
+    		<td>
+    			<textarea name="reponse4" form="myform" rows="10" cols="100"></textarea>
+    		</td>
+   		</tr>
+
+  		<tr>
+			<td>
+			</td>
+		</tr>
+	
+    </table>
+    </div>
+
+	<button class="button valider"><span><input type="submit" form="myform"/></span></button>
+
+	</FORM>	
+	<a href="{{ url_for('index') }}"><button class="button retour"><span>Retour</span></button></a></td>
+
+{% endblock %}
+
+</body>
+</html>
