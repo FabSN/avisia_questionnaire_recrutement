@@ -23,6 +23,7 @@ def get_section():
     lg.info('RECUPERATION DE LA LISTE DES SECTIONS OK')
     return df_sections
 
+''' FONCTION DE STOCKAGE D'UN CANDIDAT '''
 def stockage_candidat(nom,prenom,section):
     cur, conn = fonction_database.fonction_connexion_sqllite()
     cur.execute("INSERT INTO candidats_en_cours(prenom_candidat,nom_candidat,section_candidat) VALUES((?), (?),(?));", (str(nom), str(prenom),str(section)))
@@ -32,9 +33,11 @@ def stockage_candidat(nom,prenom,section):
     lg.info('AJOUT DU CANDIDAT')
     return id_candidat
 
+''' ENCODING POUR LES ACCENTS A ETOFFER '''
 def encoding_modif_html(var):
     return var.replace('\\u00e9','&eacute;')
 
+''' RECUPERATION DUNE QUESTION AVEC SON ID '''
 def get_question(id):
     cur, conn = fonction_database.fonction_connexion_sqllite()
     df_question=pd.read_sql("SELECT * FROM ref_questions WHERE id_question = '{}';".format(id),conn)
@@ -44,16 +47,15 @@ def get_question(id):
     json_question=df_question.loc[0].to_json()
     json_question=ast.literal_eval(json_question)
     json_question['liste_reponses_questions']=ast.literal_eval(json_question['liste_reponses_questions'])
-
     json_question['libelle_question']=encoding_modif_html(json_question['libelle_question'])
 
     for i in json_question['liste_reponses_questions'].keys():
         json_question['liste_reponses_questions'][i]=json_question['liste_reponses_questions'][i].replace('\n','<br>')
         json_question['liste_reponses_questions'][i]=encoding_modif_html(json_question['liste_reponses_questions'][i])
 
-
     return json_question
 
+''' AJOUT DE LA REPONSE A LA QUESTION DUN CANDIDAT'''
 def insert_or_update_reponse_question(id_question, reponse_question_candidat, id_candidat):
     # On regarde si il faut faire un insert ou un update
     cur, conn = fonction_database.fonction_connexion_sqllite()
@@ -73,9 +75,9 @@ def insert_or_update_reponse_question(id_question, reponse_question_candidat, id
         cur, conn = fonction_database.fonction_connexion_sqllite()
         cur.execute("INSERT INTO candidats_reponses_questions(foreign_id_candidat,foreign_id_question,reponse_question_candidat) VALUES((?), (?),(?));", (int(id_candidat), str(id_question),str(reponse_question_candidat)))
         fonction_database.fonction_connexion_sqllite_fermeture(cur,conn)
-
     return 'ok'
 
+''' VALIDATION SI IL Y A UNE QUESTION SUIVANTE OU NON '''
 def check_question_suivante(section_recherche,question_en_cours):
     # Calcul de l'id de la question suivante
     question_suivante=question_en_cours.split('_')[0]+'_'+'{0:03}'.format(int(question_en_cours.split('_')[1])+1)
@@ -93,6 +95,7 @@ def check_question_suivante(section_recherche,question_en_cours):
     return number_of_rows
 
 
+''' OBTENIR LA REPONSE DUNE QUESTION DU CANDIDAT'''
 def get_reponse_question(id_question,id_candidat):
     # On regarde si il faut faire un insert ou un update
     cur, conn = fonction_database.fonction_connexion_sqllite()
@@ -113,8 +116,7 @@ def get_reponse_question(id_question,id_candidat):
         reponse_candidat=str(reponse_candidat).split('&')
         fonction_database.fonction_connexion_sqllite_fermeture(cur, conn)
     else:
-        reponse_candidat=9999
-
+        reponse_candidat=['9999']
     return reponse_candidat
 
 

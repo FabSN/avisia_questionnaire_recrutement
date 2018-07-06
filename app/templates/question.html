@@ -35,7 +35,7 @@
   				<fieldset>
 				{% if json_question['type_formulaire_question'] == "button" %}
 					{% for id in json_question['liste_reponses_questions'].keys() %}
-							{% if id == reponse_candidat_html %}
+							{% if id in reponse_candidat_html %}
 								<input type="radio" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
 							{% else %}
 								<input type="radio" id="coding" name="choix_reponse" value="{{id}}">
@@ -54,10 +54,10 @@
 					{% endfor %}
 
 				{% elif json_question['type_formulaire_question'] == "text" %}
-					{% if '9999' == reponse_candidat_html %}
+					{% if '9999' in reponse_candidat_html %}
 						<textarea name="choix_reponse" form="myform" rows="10" cols="100"></textarea>
 					{% else %}
-						<textarea name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html}}</textarea>
+							<textarea name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html[2:reponse_candidat_html|length-2]}}</textarea>
 					{% endif%}
 				{% endif %}
 				</fieldset>

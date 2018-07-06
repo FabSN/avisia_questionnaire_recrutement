@@ -35,9 +35,10 @@ app = Flask(__name__)
 ''' Page d'accueil '''
 @app.route('/')
 def index():
-    # Recup des sessions disponibles
+    # Recup des sections disponibles : R PYTHON ...
     df_sections = interaction_database_app.get_section()
     # Stockage dans une variable de session
+    # Variable disponible toute la session du user dont on initialise sur la page d'accueil car on stockera ensuite l'id candidat...
     session['dataframe_section']=df_sections.to_json(orient='records')
     session['id_candidat']=''
     session['nom_candidat'] = ''
@@ -47,6 +48,7 @@ def index():
     return render_template('home.html', section_table=df_sections)
 
 ''' Page candidat '''
+''' Page contenant les sections sélectionnées pour le candidat'''
 @app.route('/candidat', methods=['GET', 'POST'])
 def candidat():
     # On arrive depuis la page Home
@@ -67,17 +69,21 @@ def candidat():
         lg.info('SECTION CHOIX : {}'.format(section_choix))
         return render_template('candidat.html', nom_candidat=nom_candidat,prenom_candidat=prenom_candidat,section_choix=section_choix,df_section=df_sections_v2)
 
+    # Si on arrive avec un get et qu'il y a un id_candidat dans la session alors on affiche la liste des sections
     elif request.method == 'GET' and session['id_candidat']<>'':
         df_sections_v2 = pd.read_json(session['dataframe_section'], orient='records')
         return render_template('candidat.html', nom_candidat=session['nom_candidat']
                                               , prenom_candidat=session['prenom_candidat']
                                               ,section_choix=session['section_choix']
                                               , df_section=df_sections_v2)
+    # Sinon on renvoit l'accueil car on a rien à faire là
     else:
         return redirect(url_for('index'))
 
 
 ''' Page lancement_questionnaire'''
+''' Page de transition que l'on appelle depuis la page candidat avec une valeur du choix de la section'''
+''' Cette page fait juste une redirection vers la première question de la section sélectionnée '''
 @app.route('/lancement_questionnaire', methods=['GET', 'POST'])
 def lancement_questionnaire():
     # On arrive depuis la page Home
@@ -89,6 +95,7 @@ def lancement_questionnaire():
         return redirect(url_for('index'))
 
 
+''' Affichage de la question i de la section choisit '''
 @app.route('/question/<string:id_question>/', methods=['GET', 'POST'])
 def question(id_question):
     # On arrive avec un GET depuis la page candidat
@@ -96,34 +103,35 @@ def question(id_question):
         lg.info("lancement de la question "+id_question)
         # Recupération de la question
         json_question_app = interaction_database_app.get_question(id_question)
-
         # Recuperation de la reponse du candidat si il y en a une
         reponse_candidat_app=interaction_database_app.get_reponse_question(id_question=id_question,id_candidat=session['id_candidat'])
-        print "reponse "+str(reponse_candidat_app)
         return render_template('question.html', json_question= json_question_app,reponse_candidat_html=str(reponse_candidat_app))
 
+    # pas un vrai candidat actif donc retour accueil
     elif request.method == 'GET' and session['id_candidat'] == '':
         return redirect(url_for('index'))
-    # On arrive avec un POST quand il y a validation de la question
+    # On arrive avec un POST quand il y a validation de la question précédente
     elif request.method == 'POST':
-
         ##  Insertion de la réponse
         # différent si il s'agit d'uncheckbox ou d'un button
+        # Si plus de 1 réponse alors checkbox donc on récupère dans getlist sinon avec get
         if len(request.form.getlist('choix_reponse'))>1:
             reponse=request.form.getlist('choix_reponse')
             reponse="&".join(reponse)
-            print reponse
         else:
-            request.form.get('choix_reponse')
+            reponse=request.form.get('choix_reponse')
 
         interaction_database_app.insert_or_update_reponse_question(id_question=request.form.get('id_question')
-                                                       , reponse_question_candidat=request.form.get('choix_reponse')
+                                                       , reponse_question_candidat=reponse
                                                        , id_candidat=session['id_candidat'][0])
 
         # Recherche si il y a une question suivante dans la partie
         flag_question_suivante=interaction_database_app.check_question_suivante(section_recherche=request.form.get('id_section')
                                                         ,question_en_cours=request.form.get('id_question'))
 
+        # On vérifie si il y a une question suivante pour faire la redirection qui va bien.
+        #   Question suivante
+        #   Page candidat sinon
         if flag_question_suivante==1:
             # Calcul de l'id de la question suivante
             question_en_cours=request.form.get('id_question')
