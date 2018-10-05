@@ -22,7 +22,10 @@
   		<tr>
 				<td>
 					<div id="classement_container">
-						{{ json_question.libelle|safe }}
+						{% autoescape false %}
+							{{ json_question.libelle }}
+						{% endautoescape %}
+
 						<input type="hidden" name="id_question" value="{{id_question}}">
 						<input type="hidden" name="section_en_cours" value="{{section_en_cours}}">
 					</div>
@@ -38,7 +41,13 @@
 							{% else %}
 								<input type="radio" id="coding" name="choix_reponse" value="{{id}}">
 							{% endif %}
-							<label for="coding"><h2 style="font-size:30px;">{{json_question.reponse[id]|safe}}</h2></label></BR>
+								<label for="coding">
+									<h2 style="font-size:30px;">
+										{% autoescape false %}
+											{{json_question.reponse[id]|safe}}
+										{% endautoescape %}
+									</h2>
+								</label></BR>
 					{% endfor %}
 
 				{% elif json_question.type == "checkbox" %}
@@ -48,7 +57,14 @@
 						{% else %}
 							<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}">
 						{% endif %}
-						<label for="coding"><h2 style="font-size:30px;">{{json_question.reponse[id]|safe}}</h2></label></BR>
+						<label for="coding">
+							<h2 style="font-size:30px;">
+								{% autoescape false %}
+									{{json_question.reponse[id]|safe}}
+								{% endautoescape %}
+							</h2>
+						</label>
+					</BR>
 					{% endfor %}
 
 				{% elif json_question.type == "text" %}

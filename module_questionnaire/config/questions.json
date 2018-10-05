@@ -2,14 +2,14 @@
 	"Python":{
                 "1":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 1",
-                  "reponse":{"1":"ok","2":"KO"},
+                  "libelle_question":"Ceci est la <br/> question 1",
+                  "reponse":{"1":"ok","2":"KO<br/>c'est une proposition de <br/> solution"},
                   "correct":"2"
                 }
               , "2":{
                   "type":"checkbox",
                   "libelle_question":"Ceci est la question 2",
-                  "reponse":{"1":"ok","2":"KObablab"},
+                  "reponse":{"1":"ok","2":"KOba<br/>blab"},
                   "correct":["1","2"]
                 }
               , "3":{
@@ -22,21 +22,29 @@
 	"Spark":{
                 "1":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 1",
-                  "reponse":{"1":"ok","2":"KO"},
-                  "correct":"2"
+                  "libelle_question":"Ceci est la question 1 de Spark",
+                  "reponse":{"1":"ok","2":"KO","3":"la solution 3","4":"La solution 4"},
+                  "correct":"4"
                 }
               , "2":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 2",
+                  "libelle_question":"Ceci est la question 2 de Spark",
                   "reponse":{"1":"ok","2":"KObablab"},
                   "correct":"2"
                 }
               , "3":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 3",
+                  "libelle_question":"Ceci est la question 3 de Spark",
                   "reponse":{"1":"ok","2":"KObablab"},
                   "correct":"2"
+                }
+             },
+	"SAS":{
+                "1":{
+                  "type":"button",
+                  "libelle_question":"Ceci est la question 1 de SAS",
+                  "reponse":{"1":"ok","2":"KO","3":"la solution 3","4":"La solution 4"},
+                  "correct":"4"
                 }
              }
 }
