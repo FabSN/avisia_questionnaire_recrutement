@@ -4,6 +4,7 @@
 # Importation des packages
 from flask import Flask, render_template, request,redirect,url_for,session
 import logging as lg
+import json
 from module_questionnaire import questionnaire
 from module_candidat import candidat_use
 
@@ -62,13 +63,26 @@ def lancement_questionnaire():
 @app.route('/question/<string:section_en_cours>/<string:id_question>/', methods=['GET', 'POST'])
 def question(section_en_cours,id_question):
     if request.method == 'GET' and session['candidat']<>'':
-        # question
-        dict_question.get_question(section_en_cours,id_question)
-
         # search response
-        print type(session['candidat'])
-        reponse_candidat_app=interaction_database_app.get_reponse_question(id_question=id_question,id_candidat=session['id_candidat'])
-        return render_template('question.html', json_question= json_question_app,reponse_candidat_html=str(reponse_candidat_app))
+        json_candidat=json.loads(session['candidat'])
+        if "response" in json_candidat.keys():
+            candidat_en_cours=candidat_use.Candidat(json_candidat['nom_candidat']
+                                                    ,json_candidat['prenom_candidat']
+                                                    ,json_candidat['section_choix']
+                                                    ,json_candidat['id_candidat']
+                                                    ,json_candidat['response']
+                                                    )
+        else:
+            candidat_en_cours=candidat_use.Candidat(json_candidat['nom_candidat']
+                                                    ,json_candidat['prenom_candidat']
+                                                    ,json_candidat['section_choix']
+                                                    ,json_candidat['id_candidat']
+                                                    )
+
+        return render_template('question.html'
+                    , json_question= dict_question.get_question(section_en_cours,id_question)
+                    , reponse_candidat_html=candidat_en_cours.search_response(section_en_cours,id_question)
+                       )
 
     # pas un vrai candidat actif donc retour accueil
     elif request.method == 'GET' and session['id_candidat'] == '':
