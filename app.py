@@ -119,7 +119,7 @@ def validation_questionnaire():
     # On arrive depuis la page Candidat
     if session['candidat']<>'':
         dict_question.validation_questionnaire(session['candidat'])
-        return redirect(url_for('index'))
+        return redirect(url_for('candidat'))
     else:
         return redirect(url_for('index'))
 

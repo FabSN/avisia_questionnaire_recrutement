@@ -33,24 +33,31 @@ class Questionnaire:
             else:
                 return 'NO'
 
+
     def validation_questionnaire(self,resultat):
         json_resultat=json.loads(resultat)
         reponse=json_resultat['response']
+
+        compilation_reponse={}
         for section in json_resultat['section_choix']:
-            print section
+            compilation_reponse[section]={}
             for q in self.liste_question[section]:
-                print '################ REPONSE CORRECTE ################'
-                print self.liste_question[section][q].correct
-                if section in reponse.keys():
-                    if reponse[section][q]:
-                        print '################ REPONSE CANDIDAT ################'
-                        print reponse[section][q]
-                        if self.liste_question[section][q].correct==reponse[section][q]:
-                            print 'CORRECT'
-                        else:
-                            print 'FAUX'
-                else:
-                    print 'FAUX'
+                question_courante=self.liste_question[section][q]
+                sortie={}
+                sortie['correction']=question_courante.traitement_une_question(section,q,reponse)
+                sortie['question']=question_courante.libelle
+                compilation_reponse[section][q]=sortie
+
+        ###########################
+        # Affichage des résultats
+        ###########################
+        for section in json_resultat['section_choix']:
+            print "################################"
+            print "SECTION : {}".format(section)
+            print "################################"
+            liste=[int(i) for i in self.liste_question[section]]
+            for q in sorted(liste):
+                print "Question : {} \n Correction : {} \n".format(compilation_reponse[section][str(q)]['question'],compilation_reponse[section][str(q)]['correction'])
 
 
 

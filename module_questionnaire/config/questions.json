@@ -10,7 +10,7 @@
                   "type":"checkbox",
                   "libelle_question":"Ceci est la question 2",
                   "reponse":{"1":"ok","2":"KObablab"},
-                  "correct":"2"
+                  "correct":["1","2"]
                 }
               , "3":{
                   "type":"text",
