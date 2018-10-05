@@ -4,20 +4,8 @@
 # Importation des packages
 from flask import Flask, render_template, request,redirect,url_for,session
 import logging as lg
-import datetime
-from questionnaire.questionnaire import Questionnaire
-from candidat.candidat import Candidat
-
-# Initialisation de la log
-'''t = datetime.datetime.now()
-fn = 'logs/run_flask.{}.log'.format(t.strftime("%Y-%m-%d"))
-lg.basicConfig(filename = fn,
-               level = lg.INFO,
-               filemode = 'a',
-               format = '%(asctime)s\t%(levelname)s\t%(message)s',
-               datefmt = '%Y-%m-%d %H:%M:%S'
-               )
-'''
+from module_questionnaire import questionnaire
+from module_candidat import candidat_use
 
 ###############################
 # Lancement app
@@ -25,7 +13,7 @@ app = Flask(__name__)
 
 # Initialisation du questionnaire
 global dict_question
-dict_question=Questionnaire()
+dict_question=questionnaire.Questionnaire()
 
 
 ''' Page d'accueil '''
@@ -40,9 +28,7 @@ def candidat():
     # On arrive depuis la page Home
     if request.method == 'POST':
         # Recuperation des variables
-        candidat_en_cours=Candidat(request.form.get('nom_candidat')
-                                   ,request.form.get('prenom_candidat')
-                                   ,request.form.getlist('section_choix'))
+        candidat_en_cours=candidat_use.Candidat(request.form.get('nom_candidat'), request.form.get('prenom_candidat'), request.form.get('section_choix'))
         session['candidat']=candidat_en_cours.to_json()
         return render_template('candidat.html',candidat=candidat_en_cours)
 
@@ -63,8 +49,8 @@ def candidat():
 def lancement_questionnaire():
     # On arrive depuis la page Home
     if request.method == 'POST':
-        # Recuperation des variables
         launch_questionnaire = request.form.get('choix_questionnaire')
+
         return redirect(url_for('question'
                                 ,section_en_cours=launch_questionnaire
                                 ,id_question='1'))
@@ -73,15 +59,14 @@ def lancement_questionnaire():
 
 
 ''' Affichage de la question i de la section choisit '''
-@app.route('/question/<string:id_question>/', methods=['GET', 'POST'])
-def question(id_question):
-    # On arrive avec un GET depuis la page candidat
+@app.route('/question/<string:section_en_cours>/<string:id_question>/', methods=['GET', 'POST'])
+def question(section_en_cours,id_question):
     if request.method == 'GET' and session['candidat']<>'':
-        lg.info("lancement de la question "+id_question)
-        # Recupération de la question
-        dict_question.get_question(section_question,id_question)
+        # question
+        dict_question.get_question(section_en_cours,id_question)
 
-        # Recuperation de la reponse du candidat si il y en a une
+        # search response
+        print type(session['candidat'])
         reponse_candidat_app=interaction_database_app.get_reponse_question(id_question=id_question,id_candidat=session['id_candidat'])
         return render_template('question.html', json_question= json_question_app,reponse_candidat_html=str(reponse_candidat_app))
 

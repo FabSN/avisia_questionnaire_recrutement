@@ -5,7 +5,7 @@ from question import Question
 
 class Questionnaire:
     def __init__(self):
-        with open('questionnaire/config/questions.json') as question_file:
+        with open('module_questionnaire/config/questions.json') as question_file:
             json_questionnaire = json.load(question_file)
 
         self.liste_question={}
@@ -22,6 +22,6 @@ class Questionnaire:
 
     ''' RECUPERATION DUNE QUESTION AVEC SON ID '''
     def get_question(self,section_en_cours,question_en_cours):
-        return self[section_en_cours][question_en_cours]
+        return self.liste_question[section_en_cours][question_en_cours]
 
 
