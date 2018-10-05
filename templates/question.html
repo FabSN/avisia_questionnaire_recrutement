@@ -11,55 +11,48 @@
 	<table id="table_header">
 		<tr>
 			<td>
-  				<h1>Question {{json_question['ref_id_section']}}</h1>
+  				<h1>Question {{section_en_cours}} {{id_question}}</h1>
 			</td>
 		</tr>
 	</table>
 
 	<div id="table_container">
   	<table id="table_container">
-  	<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=json_question['id_question'])}}">
-  		
+  	<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=id_question,section_en_cours=section_en_cours)}}">
   		<tr>
 				<td>
 					<div id="classement_container">
-						{{ json_question['libelle_question']|safe }}
-						<input type="text" name="id_question" value="{{json_question['id_question']}}" readonly>
-						<input type="text" name="id_section" value="{{json_question['ref_id_section']}}" readonly>
-						<input type="text" name="id_section" value="{{json_question['ref_id_section']}}" readonly>
+						{{ json_question.libelle|safe }}
+						<input type="hidden" name="id_question" value="{{id_question}}">
+						<input type="hidden" name="section_en_cours" value="{{section_en_cours}}">
 					</div>
 				</td>
 		</tr>
-  		
   		<tr>
 			<td>
   				<fieldset>
-				{% if json_question['type_formulaire_question'] == "button" %}
-					{% for id in json_question['liste_reponses_questions'].keys() %}
-							{% if id in reponse_candidat_html %}
+				{% if json_question.type == "button" %}
+					{% for id in json_question.reponse.keys() %}
+							{% if id == reponse_candidat_html %}
 								<input type="radio" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
 							{% else %}
 								<input type="radio" id="coding" name="choix_reponse" value="{{id}}">
 							{% endif %}
-							<label for="coding"><h2 style="font-size:30px;">{{json_question['liste_reponses_questions'][id]|safe}}</h2></label></BR>
+							<label for="coding"><h2 style="font-size:30px;">{{json_question.reponse[id]|safe}}</h2></label></BR>
 					{% endfor %}
 
-				{% elif json_question['type_formulaire_question'] == "checkbox" %}
-					{% for id in json_question['liste_reponses_questions'].keys() %}
+				{% elif json_question.type == "checkbox" %}
+					{% for id in json_question.reponse.keys() %}
 						{% if id in reponse_candidat_html %}
 							<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
 						{% else %}
 							<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}">
 						{% endif %}
-						<label for="coding"><h2 style="font-size:30px;">{{json_question['liste_reponses_questions'][id]|safe}}</h2></label></BR>
+						<label for="coding"><h2 style="font-size:30px;">{{json_question.reponse[id]|safe}}</h2></label></BR>
 					{% endfor %}
 
-				{% elif json_question['type_formulaire_question'] == "text" %}
-					{% if '9999' in reponse_candidat_html %}
-						<textarea name="choix_reponse" form="myform" rows="10" cols="100"></textarea>
-					{% else %}
-							<textarea name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html[2:reponse_candidat_html|length-2]}}</textarea>
-					{% endif%}
+				{% elif json_question.type == "text" %}
+					<textarea name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html}}</textarea>
 				{% endif %}
 				</fieldset>
 			</td>
@@ -68,10 +61,10 @@
     </table>
     </div>
 
-	<a href="{{ url_for('index') }}"><button class="button retour"><span>Retour</span></button></a></td>
 	<button class="button valider"><span><input type="submit" form="myform"/></span></button>
 
 	</FORM>	
+	<a href="{{ url_for('candidat') }}"><button class="button retour"><span>Retour</span></button></a></td>
 
 {% endblock %}
 

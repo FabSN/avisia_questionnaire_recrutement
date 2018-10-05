@@ -13,9 +13,7 @@
 
   <div id="table_container">
   <table id="table_container">
-
 	<FORM id="myform_question" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
-
 		{% for id in candidat.section_choix %}
 		<tr>
 			<td>
@@ -23,17 +21,13 @@
 			</td>
 		</tr>
 		{% endfor %}
-		<tr>
-			<td>
-
-			</td>
-		</tr>
-
 	</FORM>
     </table>
     </div>
 
 	<a href="{{ url_for('index') }}"><button class="button retour"><span>Retour</span></button></a></td>
+
+	<a href="{{ url_for('validation_questionnaire') }}"><button class="button valider" onclick="return confirm('Confirmer?')"><span>Valider le questionnaire</span></button></a></td>
 
 
 {% endblock %}

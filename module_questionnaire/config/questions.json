@@ -1,14 +1,40 @@
 {
-	"python":{
+	"Python":{
                 "1":{
-                  "type":"text",
+                  "type":"button",
                   "libelle_question":"Ceci est la question 1",
                   "reponse":{"1":"ok","2":"KO"},
                   "correct":"2"
-                },
-                "2":{
-                  "type":"text",
+                }
+              , "2":{
+                  "type":"checkbox",
                   "libelle_question":"Ceci est la question 2",
+                  "reponse":{"1":"ok","2":"KObablab"},
+                  "correct":"2"
+                }
+              , "3":{
+                  "type":"text",
+                  "libelle_question":"Ceci est la question 3",
+                  "reponse":"",
+                  "correct":""
+                }
+             },
+	"Spark":{
+                "1":{
+                  "type":"button",
+                  "libelle_question":"Ceci est la question 1",
+                  "reponse":{"1":"ok","2":"KO"},
+                  "correct":"2"
+                }
+              , "2":{
+                  "type":"button",
+                  "libelle_question":"Ceci est la question 2",
+                  "reponse":{"1":"ok","2":"KObablab"},
+                  "correct":"2"
+                }
+              , "3":{
+                  "type":"button",
+                  "libelle_question":"Ceci est la question 3",
                   "reponse":{"1":"ok","2":"KObablab"},
                   "correct":"2"
                 }

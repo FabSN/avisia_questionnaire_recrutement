@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
 
-
-
 {% block body %}
+
 	<table id="table_header">
 		<tr>
 			<td>
@@ -24,10 +23,10 @@
     	</tr>
     	<tr>
     		<td>
-    		<input type="text" id="uname" name="nom_candidat">
+    		<input type="text" id="uname" required="required" name="nom_candidat">
     		</td>
     		<td>
-    		<input type="text" id="uname" name="prenom_candidat">
+    		<input type="text" id="uname" required="required" name="prenom_candidat">
     		</td>
    		</tr>
 	</table>
@@ -38,8 +37,8 @@
 				<fieldset>
 					</br>
 					{% for id in section_table %}
-						<input type="checkbox" id="coding" name="section_choix" value="{{id}}">
-						<label for="coding"  style="width:150px;"><p>{{id}}</p ></label>
+						<input type="checkbox" id="code" name="section_choix" value="{{id}}">
+						<label for="code"  style="width:150px;"><p>{{id}}</p ></label>
 					{% endfor %}
 					</br>
 				</fieldset>
@@ -47,9 +46,8 @@
 		</tr>
 	</table>
 
-    <button class="button valider"><span>Valider</span></button>
-    
-	
+    <button class="button valider" id="checkBtn"><span>Valider</span></button>
+
 	</FORM>	
 
   
