@@ -45,5 +45,5 @@ class Question:
                 # Si c'est du text on retourne le champs texte
                 else:
                     return reponse_candidat[section][q]
-        else:
-            return 'ko - pas de reponse'
+
+        return 'ko - pas de reponse'
