@@ -5,7 +5,7 @@
 	<table id="table_header">
 		<tr>
 			<td>
-  				<h1>Bonjour {{prenom_candidat}} {{nom_candidat}}</h1>
+  				<h1>Bonjour {{candidat.prenom_candidat}} {{candidat.nom_candidat}}</h1>
 			</td>
 		</tr>
 	</table>
@@ -16,10 +16,10 @@
 
 	<FORM id="myform_question" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
 
-		{% for id in section_choix %}
+		{% for id in candidat.section_choix %}
 		<tr>
 			<td>
-				<button class="button" type="submit" name="choix_questionnaire" value="{{df_section[df_section['id_section']==id]['id_section'].values[0]}}">{{df_section[df_section['id_section']==id]['libelle_section'].values[0]}}</button>
+				<button class="button" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
 			</td>
 		</tr>
 		{% endfor %}

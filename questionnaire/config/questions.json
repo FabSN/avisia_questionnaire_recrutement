@@ -1,0 +1,16 @@
+{
+	"python":{
+                "1":{
+                  "type":"text",
+                  "libelle_question":"Ceci est la question 1",
+                  "reponse":{"1":"ok","2":"KO"},
+                  "correct":"2"
+                },
+                "2":{
+                  "type":"text",
+                  "libelle_question":"Ceci est la question 2",
+                  "reponse":{"1":"ok","2":"KObablab"},
+                  "correct":"2"
+                }
+             }
+}

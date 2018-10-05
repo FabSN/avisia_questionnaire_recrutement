@@ -37,9 +37,9 @@
     		<td>
 				<fieldset>
 					</br>
-					{% for id in section_table.index %}
-						<input type="checkbox" id="coding" name="section_choix" value="{{section_table.loc[id].id_section}}">
-						<label for="coding"  style="width:150px;"><p>{{section_table.loc[id].libelle_section}}</p ></label>
+					{% for id in section_table %}
+						<input type="checkbox" id="coding" name="section_choix" value="{{id}}">
+						<label for="coding"  style="width:150px;"><p>{{id}}</p ></label>
 					{% endfor %}
 					</br>
 				</fieldset>
