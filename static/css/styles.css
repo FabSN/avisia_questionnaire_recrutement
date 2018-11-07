@@ -4,6 +4,9 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-the-big-picture/blob/master/LICENSE)
  */
 
+
+
+
 body {
  /*background: url("../img/Background_2.png") no-repeat center center fixed;
  -webkit-background-size: cover;
@@ -26,7 +29,7 @@ body {
 table {
  width:100%;
  margin:auto;
- margin-top:3%; 
+ margin-top:3%;
  padding:0;
 }
 
@@ -56,12 +59,12 @@ table {
 }
 
 
-tr { 
+tr {
  border:none;
  text-align:center;
  padding:20px;
  }
- 
+
 td{
  padding:20px;
  }
@@ -82,7 +85,7 @@ td{
 	 text-align:center;
 	 font-weight: bold;
  }
- 
+
  h2{
 	 font-size:30px;
 	 color:black;
@@ -90,7 +93,7 @@ td{
 	 text-align:center;
 	 text-transform: uppercase;
  }
- 
+
 p{
 	 font-size:20px;
 	 color:black;
@@ -98,14 +101,14 @@ p{
 	 text-align:left;
 	 padding-left:10px;
  }
- 
+
 /***********************/
- 
- 
- 
- 
-/********BUTTON*********/ 
- 
+
+
+
+
+/********BUTTON*********/
+
 .button {
 	float:right;
     background-color: #0D47A1;
@@ -117,7 +120,7 @@ p{
     margin-right:10%;
     padding:5px;
     cursor: pointer;
-    color:white; 
+    color:white;
     border-radius: 100px;
 }
 
@@ -145,7 +148,7 @@ p{
     margin-right:10%;
     padding:5px;
     cursor: pointer;
-    color:black; 
+    color:black;
     border-radius: 100px;
 }
 
@@ -173,7 +176,7 @@ p{
     margin-left:10%;
     padding:5px;
     cursor: pointer;
-    color:black; 
+    color:black;
     border-radius: 100px;
 }
 
@@ -207,33 +210,33 @@ p{
 #footer {
  width:100%;
  margin-top:30px;
- 
+
  position: fixed;
  bottom: 0;
  left: 0; right: 0
  }
- 
- #tr_footer { 
+
+ #tr_footer {
  border:none;
  text-align:center;
  padding:10px;
  background-color:rgba(255, 255, 255, 0.4);
  }
- 
+
  #td_footer {
  	padding:5px;
  }
- 
- 
+
+
 /***********************/
 
 
 /********LIENS*********/
 
 a {
-    color:#303030;   
+    color:#303030;
 }
- 
+
 a:link {
     text-decoration:none;
 }
@@ -241,10 +244,10 @@ a:link {
 a:hover {
     color: white;
     transition: all .5s ease-in-out;
-    
+
 }
- 
- 
+
+
  /***********************/
 
 
@@ -261,7 +264,7 @@ input[type=button], input[type=submit], input[type=reset] {
     border: none;
     text-decoration: none;
     cursor: pointer;
-    color:#303030; 
+    color:#303030;
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {

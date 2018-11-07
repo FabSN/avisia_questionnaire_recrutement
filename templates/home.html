@@ -10,26 +10,28 @@
 			</td>
 		</tr>
 	</table>
-    
+
+
+	<div class="container">
+
     <FORM id="myform" METHOD="POST" action="{{ url_for('candidat')}}">
-    <table>
-    	<tr>
-    		<td>
-    		<h2>Prénom </h2>
-    		</td>
-    		<td>
-    		<h2>Nom </h2>
-    		</td>
-    	</tr>
-    	<tr>
-    		<td>
-    		<input type="text" id="uname" required="required" name="nom_candidat">
-    		</td>
-    		<td>
-    		<input type="text" id="uname" required="required" name="prenom_candidat">
-    		</td>
-   		</tr>
-	</table>
+
+	<div class="container" style="padding-top:25px;">
+		<table>
+			<tr>
+				<td><h2>Prénom </h2></td>
+				<td><h2>Nom </h2></td>
+			</tr>
+			<tr>
+				<td> <input type="text" id="uname" required="required"  style="width:300px; height:40px;" name="nom_candidat"></td>
+				<td><input type="text" id="uname" required="required" name="prenom_candidat"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="container" style="padding-top:25px;">
+
+	</div>
 	
 	<table id="table_choix">
     	<tr>
@@ -46,9 +48,14 @@
 		</tr>
 	</table>
 
-    <button class="button valider" id="checkBtn"><span>Valider</span></button>
+    <!--<button class="button " id="checkBtn"><span>Valider</span></button>-->
+	<div class="col-md-10 text-center">
+		    <button  class="btn btn-primary btn-lg" id="checkBtn">Valider </button>
+	</div>
 
-	</FORM>	
+	</FORM>
+
+	</div>
 
   
 

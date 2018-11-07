@@ -1,50 +1,362 @@
 {
-	"Python":{
+
+  "Python": {
+        "1": {
+          "type": "text",
+          "libelle_question": "Quelle est votre definition dun langage objet ?",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "2": {
+          "type": "text",
+          "libelle_question": "Quelle est votre definition dune instance?",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "3": {
+          "type": "text",
+          "libelle_question": "Quelle est votre definition d'une methode",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "4": {
+          "type": "text",
+          "libelle_question": "Quelle est votre definition dune fonction ? ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "5": {
+          "type": "text",
+          "libelle_question": "Quelles sont les librairies Python permettant de gerer des dataframes ?",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "6": {
+          "type": "text",
+          "libelle_question": "Quelles sont les librairies Python permettant de gerer des tableaux ? ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "7": {
+          "type": "text",
+          "libelle_question": "Quelles sont les librairies Python permettant dutiliser des alogorithmes statistiques de classification , modelisation , machine learning ?",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "8": {
+          "type": "text",
+          "libelle_question": "Quel est le type de ce objet Python :  objet 1 = ['rouge','vert','bleu'] ? ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "9": {
+          "type": "text",
+          "libelle_question": "Quel est le type de ce objet Python :  objet = ('rouge',1) ? ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "10": {
+          "type": "text",
+          "libelle_question": "Quel est le type de ce objet Python :  objet = {'rouge':1,'vert':2,'bleu':3 } ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "11": {
+          "type": "text",
+          "libelle_question": "Ecrire une commande permettant dafficher les premiers elements dun dataframe nomme X_dataframe",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "12": {
+          "type": "text",
+          "libelle_question": "A partir du dataframe X_recode, ecrire un programme permettant de creer une variable rec_age repondant aux sorties ci_dessous",
+          "has_image": "yes",
+          "image_link": "PYTHON_12.png",
+          "reponse": "",
+          "correct": ""
+        },
+        "13": {
+          "type": "text",
+          "libelle_question": "A partir de lobjet ci dessous , ecrire un programme permettant d'obtenir la sortie suivante: objet1 = ['rouge','vert','bleu']",
+          "has_image": "yes",
+          "image_link": "PYTHON_13.png",
+          "reponse": "",
+          "correct": ""
+        },
+        "14": {
+              "type": "text",
+              "libelle_question": "Ecrire un programme permettant destimer le modele a laide des donnees des dataframes X_train et y_train.X_train contient les variables  explicatives et y_train la variable cible associee.Predire la classe d'affectation des individus presents dans le dataframe X_test :  ",
+              "has_image": "yes",
+              "image_link": "PYTHON_14.png",
+              "reponse": "",
+              "correct": ""
+            }
+  },
+
+  "Aspects metiers": {
+        "1": {
+          "type": "text",
+          "libelle_question": "Quelle est votre definition de la datascience?",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "2": {
+          "type": "text",
+          "libelle_question": "Citez 3 methodes supervisees et 3 methodes non supervisees.",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "3": {
+          "type": "text",
+          "libelle_question": "les methodologies les plus courantes d'analyse factorielle sont ACM et ACP , pouvez vous decrire rapidement les principales differences entre ces 2 methodes ?",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "4": {
+          "type": "text",
+          "libelle_question": "Pouvez vous dessiner et nommer les differentes etapes du cycle de vie client ? ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        },
+        "5": {
+          "type": "text",
+          "libelle_question": "Quelles sont les etapes d'un projet de score ? Et en combien de temps estimez vous la realisation de chacune de ces etapes ? ",
+          "has_image": "no",
+          "image_link": "",
+          "reponse": "",
+          "correct": ""
+        }
+
+  },
+	"Spark": {
+                "1": {
+                  "type": "text",
+                  "libelle_question": "Quelle est linteret d'utiliser Spark dans une demarche analytique ?",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse": "",
+                  "correct": ""
+                },
+                "2": {
+                  "type": "text",
+                  "libelle_question": "Quelles sont les interfaces disponibes pour utliser SPARK",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse": "",
+                  "correct": ""
+                },
+                "3": {
+                  "type": "text",
+                  "libelle_question": "Quelle est la librairie a privilegier pour mettre en place une demarche de machine learning sous SPARK ?",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse": "",
+                  "correct": ""
+                },
+               "4": {
+                "type": "text",
+                "libelle_question": "Quelle est la definiton dun cluster Hadoop?",
+                 "has_image": "no",
+                 "image_link": "",
+                "reponse": "",
+                "correct": ""
+              },
+               "5": {
+                "type": "text",
+                "libelle_question": "Ques-ce que un systeme de fiuchier distribues de type HDFS ?",
+                 "has_image": "no",
+                 "image_link": "",
+                "reponse": "",
+                "correct": ""
+              }
+
+    },
+  "R": {
+                "1": {
+                  "type": "text",
+                  "libelle_question": "Quel est le type de fonctionnement du logiciel R ?",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse": "",
+                  "correct": ""
+                },
+                "2": {
+                  "type": "button",
+                  "libelle_question": "Sur le dataframe R_train , comment est-il possible de selectionner les deux premieres colonnes ? ",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse": {"1":"R_Train[1,2]" ,"2":"R_Train[c(1,2)]","3":"R_Train[,c(1,2)];","4":"R_Train[c(1,2),]"},
+                  "correct": "3"
+                },
+                "3": {
+                  "type": "button",
+                  "libelle_question": "Pour appliquer un calcul de moyenne sur chaque modalite dune variable qualitative  , il faut utiliser: ",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse":  {"1":"apply" ,"2":"tapply","3":"sapply","4":"lapply"},
+                  "correct": "3"
+                },
+               "4": {
+                "type": "button",
+                "libelle_question": "Pour ajouter des lignes dans un dataframe existant, quelle est la fonction a privilegier?",
+                 "has_image": "no",
+                 "image_link": "",
+                "reponse": {"1":"add_rows" ,"2":"cbind","3":"rbind","4":"rows_add"},
+                "correct": "3"
+              },
+               "5": {
+                "type": "button",
+                "libelle_question": "Quel est le resultat de lexecution suivante :  B<-9  rm(B)",
+                "reponse":  {"1":"la valeur 9 est affichee" ,"2":"B est suprimee","3":"une erreure saffiche","4":"La matrice B est chargee"},
+                 "has_image": "no",
+                 "image_link": "",
+                "correct": ""
+              },
+              "6": {
+                "type": "button",
+                "libelle_question": "Queel est le resultat de lexecution suivante :  rep(1:4,times=2)",
+                "has_image": "no",
+                "image_link": "",
+                "reponse":  {"1":"12341234" ,"2":"11223344","3":"1122334411223344","4":"12344321"},
+                "correct": "1"
+              },
+              "7": {
+                "type": "text",
+                "libelle_question": "Pouvez vous citer quelques packages permettant de realiser des modelisations sous R ?",
+                "has_image": "no",
+                "image_link": "",
+                "reponse": "",
+                "correct": ""
+              },
+              "8": {
+                "type": "text",
+                "libelle_question": "Pouvez vous decrire le resultat obtenu avec lexecution suivante ?  ",
+                "has_image": "yes",
+                "image_link": "R_8.png",
+                "reponse": "",
+                "correct": ""
+              }
+
+    },
+   "SAS BASE":{
                 "1":{
                   "type":"button",
-                  "libelle_question":"Ceci est la <br/> question 1",
-                  "reponse":{"1":"ok","2":"KO<br/>c'est une proposition de <br/> solution"},
-                  "correct":"2"
-                }
-              , "2":{
-                  "type":"checkbox",
-                  "libelle_question":"Ceci est la question 2",
-                  "reponse":{"1":"ok","2":"KOba<br/>blab"},
-                  "correct":["1","2"]
-                }
-              , "3":{
-                  "type":"text",
-                  "libelle_question":"Ceci est la question 3",
-                  "reponse":"",
-                  "correct":""
-                }
-             },
-	"Spark":{
-                "1":{
+                  "libelle_question":"Laquelle de ces instructions cree une bibliotheque SAS  ",
+                  "has_image": "no",
+                  "image_link": "",
+                  "reponse":{"1":"LIBNAME libref 'SAS-Data-Folder';" ,"2":"LIBNAME 'SAS-Data-Folder' libref","3":"LIBNAME=libref 'SAS-Data-Folder';","4":"LIBNAME libref 'SAS-Data-Folder';"},
+                  "correct":"1"
+                },
+                "2": {
+                  "type": "button",
+                  "libelle_question": "Au vu du tableau, quel est le type de la variable Salary en sachant que aucun format ny est associe ?  ",
+                  "has_image": "yes",
+                  "image_link": "SAS_BASE_2.png",
+                  "reponse": {
+                    "1": "Numerique",
+                    "2": "Caractere",
+                    "3": "On ne peux le savoir",
+                    "4": "Aussi bien numerique que caractere"},
+                    "correct": "2"
+
+                },
+                "3":{
+                    "type":"button",
+                    "libelle_question":"Comment est stocke le premier janvier 1960 dans une table SAS ?",
+                    "has_image": "no",
+                    "image_link": "",
+                    "reponse":{"1":"0" ,"2":"01JAN1960","3":"01/01/1960';","4":"1er janvier 1960;"},
+                    "correct":"1"
+                  },
+                "4":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 1 de Spark",
-                  "reponse":{"1":"ok","2":"KO","3":"la solution 3","4":"La solution 4"},
+                  "libelle_question":"Au vu du tableau ci dessous , quelle sera la valeur de Total si on lui assigne linstruction suivante: Total = qtr1+qtr2+qtr3+qtr4; ?",
+                  "has_image": "yes",
+                  "image_link": "SAS_BASE_4.png",
+                  "reponse":{"1":"3" ,"2":"4","3":"12","4":"Manquant"},
                   "correct":"4"
-                }
-              , "2":{
+                },
+               "5":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 2 de Spark",
-                  "reponse":{"1":"ok","2":"KObablab"},
+                  "libelle_question":"Lequel ce ces programmes combine les tables SAS One et Two pour produire Three ?",
+                  "has_image": "yes",
+                 "image_link": "SAS_BASE_5.png",
+                  "reponse":{"1":"data Three; Set One two; run;" ,"2":"data Three; Set One Two; by VarA; run;","3":"data Three; merge One Two; by VarA; run ; ","4":"data Three; Set One; set Two; by VarA; run; "},
                   "correct":"2"
                 }
-              , "3":{
-                  "type":"button",
-                  "libelle_question":"Ceci est la question 3 de Spark",
-                  "reponse":{"1":"ok","2":"KObablab"},
-                  "correct":"2"
-                }
-             },
-	"SAS":{
+          },
+      "SAS MACRO":{
                 "1":{
                   "type":"button",
-                  "libelle_question":"Ceci est la question 1 de SAS",
-                  "reponse":{"1":"ok","2":"KO","3":"la solution 3","4":"La solution 4"},
+                  "libelle_question":"Lors de lexecution du code suivant, qu'affiche linstruction 'put VARIBALE=' dans la log SAS       DATA _null_; length VARIABLE $10; call symput ('variable' = 'Quiz'); VARIABLE ='$VARIABLE';put VARIABLE=;  run ; ",
+                  "has_image": "yes",
+                  "image_link": "SAS_MACRO_1.png",
+                  "reponse":{"1":"VARIABLE= QUIZ;" ,"2":"VARIABLE=.","3":"VARIABLE=","4":"VARIABLE= &VARIABLE"},
                   "correct":"4"
+                },
+                "2": {
+                  "type": "button",
+                  "libelle_question": "Apres la soumission de ce programme , que vois ton dans la log ? ",
+                  "has_image": "yes",
+                  "image_link": "SAS_MACRO_2.png",
+                  "reponse": {
+                    "1": "a :Quiz1 , b : &b",
+                    "2": "a :Quiz2 , b : Quiz3",
+                    "3": "a :Quiz2 , b : &b",
+                    "4": "a : &a , b : Quiz3"},
+                    "correct": "3"
+
+                },
+                "3":{
+                    "type":"button",
+                    "libelle_question":"Quaffiche la log apres lexecution du code suivant? ",
+                    "has_image": "yes",
+                  "image_link": "SAS_MACRO_3.png",
+                    "reponse":{"1":"a=0" ,"2":"a=5","3":"a=10"},
+                    "correct":"3"
+                  },
+
+                "4":{
+                  "type":"button",
+                  "libelle_question":"Quel est le resultat  dans la log  du code suivant?",
+                  "has_image": "yes",
+                  "image_link": "SAS_MACRO_4.png",
+                  "reponse": {
+                    "1": "resultat :Quiz",
+                    "2": "resultat :&Quiz",
+                    "3": "resultat :&variable",
+                    "4": "resultat :&Quiz"},
+                  "correct":"2"
                 }
              }
 }

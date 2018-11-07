@@ -8,7 +8,7 @@
 
 {% block body %}
 
-	<table id="table_header">
+	<table id="table_header"">
 		<tr>
 			<td>
   				<h1>Question {{section_en_cours}} {{id_question}}</h1>
@@ -16,14 +16,24 @@
 		</tr>
 	</table>
 
+
 	<div id="table_container">
   	<table id="table_container">
+
+
   	<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=id_question,section_en_cours=section_en_cours)}}">
+
+
   		<tr>
 				<td>
 					<div id="classement_container">
 						{% autoescape false %}
-							{{ json_question.libelle }}
+						    <h4>{{ json_question.libelle }}</h4>
+							 <br>
+							 {% if json_question.has_image=="yes" %}
+								<img src="/static/img_questions/{{  json_question.image_link }}" />
+						 <br> <br>
+							 {% endif %}
 						{% endautoescape %}
 
 						<input type="hidden" name="id_question" value="{{id_question}}">
@@ -33,6 +43,7 @@
 		</tr>
   		<tr>
 			<td>
+
   				<fieldset>
 				{% if json_question.type == "button" %}
 					{% for id in json_question.reponse.keys() %}
@@ -67,8 +78,10 @@
 					</BR>
 					{% endfor %}
 
+
+
 				{% elif json_question.type == "text" %}
-					<textarea name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html}}</textarea>
+						 <textarea  class="form-control" name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html}}</textarea>
 				{% endif %}
 				</fieldset>
 			</td>
