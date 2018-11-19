@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% extends 'layout.html' %}</title>
@@ -8,94 +8,134 @@
 
 {% block body %}
 
-	<table id="table_header"">
-		<tr>
-			<td>
-  				<h1>Question {{section_en_cours}} {{id_question}}</h1>
-			</td>
-		</tr>
-	</table>
+	<h3 class="text-center text-uppercase text-secondary my-3 ">Question {{section_en_cours}} {{id_question}}</h3>
 
-
-	<div id="table_container">
-  	<table id="table_container">
-
-
-  	<FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=id_question,section_en_cours=section_en_cours)}}">
-
-
-  		<tr>
-				<td>
-					<div id="classement_container">
-						{% autoescape false %}
-						    <h4>{{ json_question.libelle }}</h4>
-							 <br>
-							 {% if json_question.has_image=="yes" %}
-								<img src="/static/img_questions/{{  json_question.image_link }}" />
-						 <br> <br>
-							 {% endif %}
-						{% endautoescape %}
-
-						<input type="hidden" name="id_question" value="{{id_question}}">
-						<input type="hidden" name="section_en_cours" value="{{section_en_cours}}">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+			<div class="container">
+				<div class="col-6">
+			  <a class="navbar-brand js-scroll-trigger" href="#page-top">Quiz de compétences</a>
+			  </div>
+			  <div class="col-6">
+					<a class="navbar-brand js-scroll-trigger float-right" href="#page-top">{{section_en_cours}}</a>
 					</div>
-				</td>
-		</tr>
-  		<tr>
-			<td>
+			  
+			</div>
+		  </nav>
+	  
+		  <!-- Section Choix Fonctions -->
+		  <FORM id="myform" METHOD="POST" action="{{ url_for('question',id_question=id_question,section_en_cours=section_en_cours)}}">
+				
+		  <section class="bg-primary text-white mb-0">
+				<div class="progress m-2" style="height: 20px;">
+					<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{id_question*2}}%;" aria-valuenow="{{id_question}}" aria-valuemin="0" aria-valuemax="100"></div>
+				 </div>
+			<div class="container col-12">
+			  <div class="row mx-auto col-12">
+				<div class="col-12">
+				  <h3 class="text-center text-uppercase text-secondary my-3 ">Question  {{id_question}} / 10</h3>
+				</div> 
 
-  				<fieldset>
-				{% if json_question.type == "button" %}
-					{% for id in json_question.reponse.keys() %}
-							{% if id == reponse_candidat_html %}
-								<input type="radio" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
-							{% else %}
-								<input type="radio" id="coding" name="choix_reponse" value="{{id}}">
-							{% endif %}
-								<label for="coding">
-									<h2 style="font-size:30px;">
-										{% autoescape false %}
-											{{json_question.reponse[id]|safe}}
-										{% endautoescape %}
-									</h2>
-								</label></BR>
-					{% endfor %}
+			  </div>
+	  
+			  <div class="row mt-5 col-12">
+					  <div class="col-12 mx-auto">
+	  
+						  {% autoescape false %}
+							  <p class="text-secondary">{{ json_question.libelle }}</p>
+							  <br>
+							  {% if json_question.has_image=="yes" %}
+							  	<div class="img-fluid mx-auto col-12">
+								  <img class="col-12" src="/static/img_questions/{{  json_question.image_link }}"  />
+								</div>
+						  <br> <br>
+							  {% endif %}
+						  {% endautoescape %}
+	  
+							  <input type="hidden" name="id_question" value="{{id_question}}">
+							  <input type="hidden" name="section_en_cours" value="{{section_en_cours}}">
+	  
+					  </div>
+			  </div>
+	  
+			  <div class="row mt-0 col-12">
 
-				{% elif json_question.type == "checkbox" %}
-					{% for id in json_question.reponse.keys() %}
-						{% if id in reponse_candidat_html %}
-							<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
-						{% else %}
-							<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}">
-						{% endif %}
-						<label for="coding">
-							<h2 style="font-size:30px;">
-								{% autoescape false %}
-									{{json_question.reponse[id]|safe}}
-								{% endautoescape %}
-							</h2>
-						</label>
-					</BR>
-					{% endfor %}
+					
+
+					  <div class="col-12 mx-auto">
+							  <fieldset>
+									  {% if json_question.type == "button" %}
+									  <div class="col-md-6 mx-auto">
+											<div class="funkyradio">
+												<fieldset>
+												
+												 {% for id in json_question.reponse.keys() %}
+												 <div class="funkyradio-success col-12">
+													
+														<input type="radio" id="{{id}}" name="choix_reponse" value="{{id}}">
+													
+													
+													<label for="{{id}}">{% autoescape false %}{{json_question.reponse[id]|safe}}{% endautoescape %}	</label>
+												</div>
+												 {% endfor %}
+												
+												 </fieldset>
+									 </div>
+									  </div>
+					  
+									  {% elif json_question.type == "checkbox" %}
+
+									  <div class="col-md-6 mx-auto">
+										   <div class="funkyradio">
+												<fieldset>
+												{% for id in json_question.reponse.keys() %}
+												{% if id in reponse_candidat_html %}
+												<div class="funkyradio-success col-12"">
+													<input type="checkbox" id="coding" name="choix_reponse" value="{{id}}" checked="checked">
+												</div>
+												{% else %}
+												<div class="funkyradio-success col-12"">
+												  <input type="checkbox" id="coding" name="choix_reponse" value="{{id}}">
+												</div>
+												{% endif %}
+												<h2 style="font-size:30px;">
+														{% autoescape false %}
+															{{json_question.reponse[id]|safe}}
+														{% endautoescape %}
+													</h2>
+												{% endfor %}
+												</fieldset>
+											</div>
+									</div>
 
 
+										  
+					  
+									  {% elif json_question.type == "text" %}
+											   <textarea  class="form-control col-form-label" name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html}}</textarea>
+									  {% endif %}
+									  </fieldset>
+					  </div>
+				</div>
+	  
+				<div class="row mt-5 col-12 mx-auto">
+						  <a class=" col-4 float-left" href="{{ url_for('candidat') }}"><button class="btn btn-danger col-12"">Retour</button></a>
+						  <div class="col-4"></div>
+					 	 <button  class="btn btn-success col-4 float-right"> <input  class="btn-success col-12 p-0" type="submit" form="myform"/></button>
+				  </div>
+			  </div>
+	  
+		  </section>
+		  </FORM>
 
-				{% elif json_question.type == "text" %}
-						 <textarea  class="form-control" name="choix_reponse" form="myform" rows="10" cols="100">{{reponse_candidat_html}}</textarea>
-				{% endif %}
-				</fieldset>
-			</td>
-		</tr>
-	
-    </table>
-    </div>
-
-	<button class="button valider"><span><input type="submit" form="myform"/></span></button>
-
-	</FORM>	
-	<a href="{{ url_for('candidat') }}"><button class="button retour"><span>Retour</span></button></a></td>
-
-{% endblock %}
+	{% endblock %}
 
 </body>
 </html>
+
+
+
+
+
+
+

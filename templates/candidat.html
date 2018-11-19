@@ -1,33 +1,91 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="fr">
 
-{% block body %}
+  <head>
 
-	<table id="table_header">
-		<tr>
-			<td>
-  				<h1>Bonjour {{candidat.prenom_candidat}} {{candidat.nom_candidat}}</h1>
-			</td>
-		</tr>
-	</table>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>Questionnaire Recrutement </title>
 
-  <div id="table_container">
-  <table id="table_container">
-	<FORM id="myform_question" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
-		{% for id in candidat.section_choix %}
-		<tr>
-			<td>
-				<button class="button" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
-			</td>
-		</tr>
-		{% endfor %}
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="../static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/freelancer.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top" class="bg-primary">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+		<a class="navbar-brand js-scroll-trigger" href="#page-top">Quiz de compétences</a>
+      </div>
+    </nav>
+
+	<!-- Section Choix Fonctions -->
+	<FORM id="myform" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
+    <section class="bg-primary text-white mb-0">
+      <div class="container col-12">
+        <div class="row mt-5 mx-auto col-12">
+          <div class="col-12">
+			<h3 class="text-center text-uppercase text-secondary my-3 ">Bonjour {{candidat.prenom_candidat}} {{candidat.nom_candidat}}</h3>
+          </div>
+		</div>
+
+		<div class="row mt-5 col-12">
+				<div class="col-8 mx-auto">
+							<fieldset>
+							{% for id in candidat.section_choix %}
+							<div class="col-8 mx-auto ">
+									<button class="btn btn-primary btn-lg col-12 m-3 mx-auto text-secondary" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
+							</div>
+							{% endfor %}
+							</fieldset>
+				</div>
+		  </div>
+
+		<div class="row mt-5 col-12 col-lg-8 mx-auto"> 	
+			<a class=" col-4 float-left" href="{{ url_for('index') }}"><button class="btn btn-danger col-12">Retour</button></a>
+			<div class="col-4"></div>
+			<a class=" col-4 float-right" href="{{ url_for('validation_questionnaire') }}"><button class="btn btn-success col-12 float-right" onclick="return confirm('Confirmer?')">Terminer</button></a>
+		</div>
+			
+		</div>
+
+	</section>
 	</FORM>
-    </table>
-    </div>
 
-	<a href="{{ url_for('index') }}"><button class="button retour"><span>Retour</span></button></a></td>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<a href="{{ url_for('validation_questionnaire') }}"><button class="button valider" onclick="return confirm('Confirmer?')"><span>Valider le questionnaire</span></button></a></td>
+    <!-- Plugin JavaScript -->
+    <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="../static/js/jqBootstrapValidation.js"></script>
+    <script src="../static/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../static/js/freelancer.min.js"></script>
+
+  </body>
+
+</html>
 
 
-{% endblock %}
+

@@ -1,62 +1,68 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends 'layout.html' %}</title>
+</head>
+<body>
 
 {% block body %}
 
-	<table id="table_header">
-		<tr>
-			<td>
-  				<h1>Quiz de compétences</h1>
-				<img src="static/img/avisia.png" style="width:150px;height:25px; margin-left:60%; align:center;">
-			</td>
-		</tr>
-	</table>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+		<a class="navbar-brand js-scroll-trigger" href="#page-top">Quiz de compétences</a>
+      </div>
+    </nav>
 
+	<!-- Section Choix Fonctions -->
+	<FORM id="myform" METHOD="POST" action="{{ url_for('candidat')}}">
+    <section class="bg-primary text-white mb-0">
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-sm-12 col-lg-6">
+			<h3 class="text-center text-uppercase text-secondary my-3 ">Prénom</h3>
+			<input class="form-control" type="text" id="uname" required="required" placeholder="Entrez votre prénom" name="prenom_candidat">
+          </div>
+		  <div class="col-sm-12 col-lg-6">
+			<h3 class="text-center text-uppercase text-secondary my-3 ">Nom</h3>
+			<input class="form-control" type="text" id="uname" required="required" placeholder="Entrez votre nom" name="nom_candidat">
+          </div>
+		</div>
 
-	<div class="container">
+		<div class="row mt-5">
+				<div class="col-md-6 mx-auto">
+						<h4>Choissisez les questionnaires</h4>
+					   <div class="funkyradio">
+							<fieldset>
+							{% for id in section_table %}
+							<div class="funkyradio-success col-12"">
+								<input type="checkbox" id="{{id}}" name="section_choix" value="{{id}}" ">
+								<label for="{{id}}" >{{id}}	</label>
+							</div>
+							{% endfor %}
+							</fieldset>
+						</div>
+				</div>
+		  </div>
 
-    <FORM id="myform" METHOD="POST" action="{{ url_for('candidat')}}">
+		  <div class="row mt-5 col-6 mx-auto">
+			  <button class="btn btn-success col-12" id="checkBtn">Suivant</button>
+			</div>
 
-	<div class="container" style="padding-top:25px;">
-		<table>
-			<tr>
-				<td><h2>Prénom </h2></td>
-				<td><h2>Nom </h2></td>
-			</tr>
-			<tr>
-				<td> <input type="text" id="uname" required="required"  style="width:300px; height:40px;" name="nom_candidat"></td>
-				<td><input type="text" id="uname" required="required" name="prenom_candidat"></td>
-			</tr>
-		</table>
-	</div>
+			
 
-	<div class="container" style="padding-top:25px;">
-
-	</div>
-	
-	<table id="table_choix">
-    	<tr>
-    		<td>
-				<fieldset>
-					</br>
-					{% for id in section_table %}
-						<input type="checkbox" id="code" name="section_choix" value="{{id}}">
-						<label for="code"  style="width:150px;"><p>{{id}}</p ></label>
-					{% endfor %}
-					</br>
-				</fieldset>
-			</td>
-		</tr>
-	</table>
-
-    <!--<button class="button " id="checkBtn"><span>Valider</span></button>-->
-	<div class="col-md-10 text-center">
-		    <button  class="btn btn-primary btn-lg" id="checkBtn">Valider </button>
-	</div>
-
+	</section>
 	</FORM>
 
+	<div class="row mt-5 col-12 mx-auto">
+		<p class="text-info text-center mx-auto">Développé avec &#9825; par Avisia - 2019 - &#169;</p>
 	</div>
 
-  
 
-{% endblock %}
+	{% endblock %}
+
+</body>
+
+</html>
+
