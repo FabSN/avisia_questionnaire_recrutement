@@ -15,16 +15,32 @@ class Questionnaire:
     def __init__(self):
         with open('module_questionnaire/config/questions.json') as question_file:
             json_questionnaire = json.load(question_file)
-            print "afficher le Json"
-            print json_questionnaire
         self.liste_question={}
+        self.nb_question_par_section={}
         for section in json_questionnaire:
             self.liste_question[section]={}
             for q in json_questionnaire.get(section):
-                self.liste_question[section][q]=Question(json_questionnaire.get(section).get(q))
+                self.liste_question[section][q]=Question(json_questionnaire.get(section).get(q),section,q)
+
+                # Pour detreminer le nombre de  question par section
+                if section in self.nb_question_par_section:
+                    self.nb_question_par_section[section]=self.nb_question_par_section[section]+1
+                else:
+                    self.nb_question_par_section[section] = 1
 
     def __str__(self):
-        return str(self.liste_question)
+        output=''
+        for sec in self.liste_question:
+            output=output+ '#######################' + '\n'
+            output=output+ ' ' + sec + ' nb questions : '+ str(self.nb_question_par_section[sec]) + '\n'
+
+            liste_num_question=[]
+            for i in self.liste_question[sec]:
+                liste_num_question=liste_num_question+[int(i)]
+            for ques in range(1,int(max(liste_num_question))+1):
+                output=output + '        q : ' + str(ques) + '\n'
+                output = output + '                Libelle : ' + str(self.liste_question[sec][str(ques)].libelle) + '\n'
+        return output
 
     ''' 
         Recuperation de la liste des sections
@@ -37,17 +53,17 @@ class Questionnaire:
     '''
     def get_question(self,section_en_cours,question_en_cours):
         print section_en_cours, question_en_cours
-
         if section_en_cours in self.liste_question.keys():
             if str(question_en_cours) in self.liste_question[section_en_cours].keys():
-                print self.liste_question[section_en_cours].keys()
                 return self.liste_question[section_en_cours][str(question_en_cours)]
             else:
                 return 'NO'
 
-
-
-
+    '''
+        Validation questionnaire :
+            Fonction de correction du questionnaire
+            @resultat : dictionnaire d'un candidat à corriger
+    '''
     def validation_questionnaire(self,resultat):
 
         json_resultat=json.loads(resultat)
