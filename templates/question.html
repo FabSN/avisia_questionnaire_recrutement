@@ -60,11 +60,11 @@
                         <div class="col-md-6 mx-auto">
                             <div class="funkyradio">
                                 {% for id in json_question.reponse.keys() %}
-                                <div class="funkyradio-default col-12">
+                                <div class="funkyradio-success col-12">
                                     {% if id == reponse_candidat_html %}
-                                    <input type="radio" name="choix_reponse" value="{{id}}" checked="checked">
+                                    <input type="radio" name="choix_reponse" id="{{id}}" value="{{id}}" checked="checked">
                                     {% else %}
-                                    <input type="radio" name="choix_reponse" value="{{id}}">
+                                    <input type="radio" name="choix_reponse" id="{{id}}" value="{{id}}">
                                     {% endif %}
                                     <label for="{{id}}">{% autoescape false %}{{json_question.reponse[id]|safe}}{%endautoescape %} </label>
                                 </div>
@@ -106,12 +106,9 @@
         </div>
 
         <div class="row mt-5 col-12 col-lg-8 mx-auto">
-            <a class=" col-4 float-left" href="{{ url_for('candidat') }}">
-                <button class="btn btn-danger col-12">Retour</button>
-            </a>
-            <button class="btn btn-success col-4 float-right"><input class="btn-success col-12 p-0" type="submit"
-                                                                     form="myform"/></button>
-            </a>
+            <a class="col-4 float-left btn btn-danger" href="{{ url_for('candidat') }}">Retour</a>
+            <div class="col-4"></div>
+            <button class="btn btn-success col-4 float-right" type="submit" form="myform"/>Valider</button>
         </div>
 
     </section>

@@ -57,10 +57,12 @@
 				</div>
 		  </div>
 
-		<div class="row mt-5 col-12 col-lg-8 mx-auto"> 	
-			<a class=" col-4 float-left" href="{{ url_for('index') }}"><button class="btn btn-danger col-12">Retour</button></a>
+		<div class="row mt-5 col-12 col-lg-8 mx-auto">
+            <!--
+			<a class=" col-4 float-left btn btn-danger" href="{{ url_for('index') }}" >Retour</a>
+			-->
 			<div class="col-4"></div>
-			<a class=" col-4 float-right" href="{{ url_for('validation_questionnaire') }}"><button class="btn btn-success col-12 float-right" onclick="return confirm('Confirmer?')">Terminer</button></a>
+			<a class=" col-4 float-right btn btn-success" href="{{ url_for('validation_questionnaire') }}" onclick="return confirm('Confirmer?')">Terminer</a>
 		</div>
 			
 		</div>

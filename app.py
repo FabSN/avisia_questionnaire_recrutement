@@ -36,7 +36,7 @@ def index():
     if session['candidat']=='':
         return render_template('home.html', section_table=dict_question.get_liste_section())
     else:
-        redirect(url_for('candidat'))
+        return redirect(url_for('candidat'))
 
 ''' Page candidat 
         Page d'accueil du profil candidat :
@@ -125,10 +125,13 @@ def question(section_en_cours,id_question):
             reponse=request.form.getlist('choix_reponse')
         else:
             reponse=request.form.get('choix_reponse')
+        print '######################'
         print reponse
+        print '######################'
         # Ajout de la réponse sur le candidat
         json_candidat = json.loads(session['candidat'])
         candidat_en_cours=candidat_use.Candidat(json_candidat)
+        candidat_en_cours.add_response_question(section_en_cours, id_question, reponse)
         print candidat_en_cours.response
         session['candidat'] = candidat_en_cours.to_json()
 
