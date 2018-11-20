@@ -25,7 +25,6 @@ class Question:
     def traitement_une_question(self,reponse_candidat):
         # Si le candidat a répondu à la question
         if self.section_question in reponse_candidat.keys():
-            print reponse_candidat[self.section_question]
             if str(self.q_question) in reponse_candidat[self.section_question] and reponse_candidat[self.section_question][str(self.q_question)]:
                 #print '################ REPONSE CANDIDAT ################'
                 #print reponse_candidat[section][q]

@@ -50,6 +50,8 @@
 							<fieldset>
 							{% for id in candidat.section_choix %}
 							<div class="col-8 mx-auto ">
+                                NB REPONSES : {{nb_question_section_reponse[id]}}
+                                TOTAL QUESTION : {{nb_question_section[id]}}
 									<button class="btn btn-primary btn-lg col-12 m-3 mx-auto text-secondary" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
 							</div>
 							{% endfor %}
