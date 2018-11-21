@@ -59,32 +59,24 @@ def candidat():
                                                     , request.form.get('prenom_candidat')
                                                     , request.form.getlist('section_choix'))
 
-            nb_q_rep_section = {}
-            for sec in candidat_en_cours.response.keys():
-                nb_q_rep_section[sec] = len(candidat_en_cours.response[sec])
-
             # Sauvegarde du candidat dans une variable de session en json
             session['candidat']=candidat_en_cours.to_json()
             # Affichage de la page candidat
             return render_template('candidat.html',
                                    candidat=candidat_en_cours,
                                    nb_question_section=dict_question.nb_question_par_section,
-                                   nb_question_section_reponse=nb_q_rep_section)
+                                   nb_question_section_reponse=candidat_en_cours.nb_rep_par_section())
 
     ##########################################################
     # Si on arrive avec un get et qu'il y a un id_candidat dans la session alors on affiche la liste des sections
     elif request.method == 'GET' and session['candidat']<>'':
         json_candidat = json.loads(session['candidat'])
         candidat_en_cours=candidat_use.Candidat(json_candidat)
-
-        nb_q_rep_section={}
-        for sec in candidat_en_cours.response.keys():
-            nb_q_rep_section[sec]=len(candidat_en_cours.response[sec])
-
+        print candidat_en_cours.nb_rep_par_section()
         return render_template('candidat.html',
                                candidat=candidat_en_cours,
                                nb_question_section=dict_question.nb_question_par_section,
-                               nb_question_section_reponse=nb_q_rep_section)
+                               nb_question_section_reponse=candidat_en_cours.nb_rep_par_section())
 
     # Sinon on renvoit l'accueil car on a rien à faire là
     else:

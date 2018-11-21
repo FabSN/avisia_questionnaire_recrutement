@@ -31,7 +31,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-		<a class="navbar-brand js-scroll-trigger" href="#page-top">Quiz de compétences</a>
+		<a class="navbar-brand js-scroll-trigger" href="#page-top">Quiz de compétences - {{candidat.prenom_candidat}} {{candidat.nom_candidat}}</a>
       </div>
     </nav>
 
@@ -39,20 +39,18 @@
 	<FORM id="myform" METHOD="POST" action="{{ url_for('lancement_questionnaire')}}">
     <section class="bg-primary text-white mb-0">
       <div class="container col-12">
-        <div class="row mt-5 mx-auto col-12">
-          <div class="col-12">
-			<h3 class="text-center text-uppercase text-secondary my-3 ">Bonjour {{candidat.prenom_candidat}} {{candidat.nom_candidat}}</h3>
-          </div>
-		</div>
-
 		<div class="row mt-5 col-12">
 				<div class="col-8 mx-auto">
 							<fieldset>
 							{% for id in candidat.section_choix %}
 							<div class="col-8 mx-auto ">
-                                NB REPONSES : {{nb_question_section_reponse[id]}}
-                                TOTAL QUESTION : {{nb_question_section[id]}}
-									<button class="btn btn-primary btn-lg col-12 m-3 mx-auto text-secondary" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
+                                {% if nb_question_section_reponse[id]==0 %}
+									<button class="btn btn-primary btn-lg col-12 m-1 mx-auto text-secondary" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
+                                {% elif nb_question_section_reponse[id]<nb_question_section[id] %}
+									<button class="btn btn-warning btn-lg col-12 m-1 mx-auto text-secondary" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
+                                {% elif nb_question_section_reponse[id]==nb_question_section[id] %}
+									<button class="btn btn-success btn-lg col-12 m-1 mx-auto text-secondary" type="submit" name="choix_questionnaire" value="{{id}}">{{id}}</button>
+                                {% endif %}
 							</div>
 							{% endfor %}
 							</fieldset>

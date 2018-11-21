@@ -63,3 +63,13 @@ class Candidat:
             self.response[section_en_cours]={}
             self.response[section_en_cours][id_question] = reponse
         return "update OK"
+
+    def nb_rep_par_section(self):
+        nb_q_rep_section = {}
+        for sec in self.section_choix:
+            # Si il a répondu a une question au moins
+            if sec in self.response:
+                nb_q_rep_section[sec] = len(self.response[sec])
+            else:
+                nb_q_rep_section[sec]=0
+        return nb_q_rep_section

@@ -2,12 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% extends 'layout.html' %}</title>
+    {% extends 'layout.html' %}
 </head>
 
 <body>
 {% block body %}
-<h3 class="text-center text-uppercase text-secondary my-3 ">Question {{section_en_cours}} {{id_question}}</h3>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
@@ -15,7 +14,7 @@
             <a class="navbar-brand js-scroll-trigger" href="{{ url_for('candidat')}}">Quiz de compétences</a>
         </div>
         <div class="col-6">
-            <a class="navbar-brand js-scroll-trigger float-right" href="#page-top">{{section_en_cours}}</a>
+            <a class="navbar-brand js-scroll-trigger float-right" href="#page-top">{{section_en_cours}} - {{id_question}} / {{nb_question_section}}</a>
         </div>
 
     </div>
@@ -25,22 +24,17 @@
 <FORM id="myform" METHOD="POST"
       action="{{ url_for('question',id_question=id_question,section_en_cours=section_en_cours)}}">
     <section class="bg-primary text-white mb-0">
-        <div class="progress m-2" style="height: 20px;">
+        <div class="progress m-4" style="height: 20px;">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                  style="width: {{percent_bar}}%;" aria-valuenow="{{percent_bar}}" aria-valuemin="0" aria-valuemax="100">
                 {{percent_bar}}%
             </div>
         </div>
         <div class="container col-12">
-            <div class="row mx-auto col-12">
-                <div class="col-12">
-                    <h3 class="text-center text-uppercase text-secondary my-3 ">Question {{id_question}} /{{nb_question_section}}</h3>
-                </div>
-            </div>
-            <div class="row mt-5 col-12">
+            <div class="row mt-3 col-12">
                 <div class="col-12 mx-auto">
                     {% autoescape false %}
-                    <p class="text-secondary">{{ json_question.libelle }}</p>
+                    <h5 class="text-secondary">{{ json_question.libelle }}</h5>
                     {% if json_question.has_image=="yes" %}
                     <br>
                     <div class="img-fluid mx-auto col-12">
@@ -76,10 +70,8 @@
                             <div class="funkyradio">
                                 {% for id in json_question.reponse.keys() %}
                                 {% if id in reponse_candidat_html %}
-                                <div class="funkyradio-success col-12"
-                                ">
-                                <input type="checkbox" id="coding" name="choix_reponse" value="{{id}}"
-                                       checked="checked">
+                                <div class="funkyradio-success col-12">
+                                <input type="checkbox" id="coding" name="choix_reponse" value="{{id}}"checked="checked">
                             </div>
                             {% else %}
                             <div class="funkyradio-success col-12"
