@@ -34,7 +34,8 @@
             <div class="row mt-3 col-12">
                 <div class="col-12 mx-auto">
                     {% autoescape false %}
-                    <h5 class="text-secondary">{{ json_question.libelle }}</h5>
+                    <h5 class="text-secondary" >{{ json_question.libelle }}</h5>
+
                     {% if json_question.has_image=="yes" %}
                     <br>
                     <div class="img-fluid mx-auto col-12">
@@ -47,7 +48,7 @@
                     <input type="hidden" name="section_en_cours" value="{{section_en_cours}}">
                 </div>
             </div>
-            <div class="row mt-0 col-12">
+            <div class="row mt-3 col-12">
                 <div class="col-12 mx-auto">
                     <fieldset>
                         {% if json_question.type == "button" %}

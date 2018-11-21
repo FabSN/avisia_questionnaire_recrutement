@@ -58,10 +58,12 @@ class Candidat:
     '''
     def add_response_question(self,section_en_cours,id_question,reponse):
         if section_en_cours in self.response.keys():
-            self.response[section_en_cours][id_question]=reponse
+            if reponse <> '':
+                self.response[section_en_cours][id_question]=reponse
         else:
             self.response[section_en_cours]={}
-            self.response[section_en_cours][id_question] = reponse
+            if reponse <> '':
+                self.response[section_en_cours][id_question] = reponse
         return "update OK"
 
     def nb_rep_par_section(self):
