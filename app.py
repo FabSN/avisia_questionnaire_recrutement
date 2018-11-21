@@ -14,7 +14,7 @@ from module_candidat import candidat_use
 # Initialisation du questionnaire
 global dict_question
 dict_question = questionnaire.Questionnaire()
-print dict_question
+#print dict_question
 
 # Lancement app
 app = Flask(__name__)

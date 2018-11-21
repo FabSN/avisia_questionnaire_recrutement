@@ -1,5 +1,4 @@
 {
-
   "Python": {
         "1": {
           "type": "text",
@@ -271,7 +270,7 @@
    "SAS BASE":{
                 "1":{
                   "type":"button",
-                  "libelle_question":"Laquelle de ces instructions cree une bibliotheque SAS  ",
+                  "libelle_question":"Laquelle de ces instructions permet d'assigner une bibliothèque SAS ?",
                   "has_image": "no",
                   "image_link": "",
                   "reponse":{"1":"LIBNAME libref 'SAS-Data-Folder';" ,"2":"LIBNAME 'SAS-Data-Folder' libref","3":"LIBNAME=libref 'SAS-Data-Folder';","4":"LIBNAME libref 'SAS-Data-Folder';"},

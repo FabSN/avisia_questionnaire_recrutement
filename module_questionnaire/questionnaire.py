@@ -14,7 +14,8 @@ import datetime
 class Questionnaire:
     def __init__(self):
         with open('module_questionnaire/config/questions.json') as question_file:
-            json_questionnaire = json.load(question_file)
+            json_questionnaire = json.load(question_file,encoding='utf-8-sig')
+
         self.liste_question={}
         self.nb_question_par_section={}
         for section in json_questionnaire:
