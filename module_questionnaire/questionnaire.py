@@ -9,7 +9,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
-
+import datetime
 
 class Questionnaire:
     def __init__(self):
@@ -86,7 +86,8 @@ class Questionnaire:
 
 
             # Creqtion du fichier pdf
-            pdf_name = "CORRECTION_TEST"
+            now=datetime.datetime.now().strftime('%Y%m%d')
+            pdf_name = now+'_'+json_resultat['nom_candidat']+'_'+json_resultat['prenom_candidat']
             c = canvas.Canvas(pdf_name+'.pdf')
 
             # Variable declarée pour verifiier si les réponses python ont été afficher
