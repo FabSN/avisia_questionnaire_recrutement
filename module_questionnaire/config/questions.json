@@ -310,7 +310,7 @@
                   "libelle_question":"Lequel ce ces programmes combine les tables SAS One et Two pour produire Three ?",
                   "has_image": "yes",
                  "image_link": "SAS_BASE_5.png",
-                  "reponse":{"1":"data Three; Set One two; run;" ,"2":"data Three; Set One Two; by VarA; run;","3":"data Three; merge One Two; by VarA; run ; ","4":"data Three; Set One; set Two; by VarA; run; "},
+                  "reponse":{"1":"data Three;Set One two; run;" ,"2":"data Three; Set One Two; by VarA; run;","3":"data Three; merge One Two; by VarA; run ; ","4":"data Three; Set One; set Two; by VarA; run; "},
                   "correct":"2"
                 }
           },

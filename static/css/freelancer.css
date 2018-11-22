@@ -262,7 +262,7 @@ a:focus, a:hover, a:active {
   border-color: #1a252f;
 }
 
-.img-fluid.logo {
+.img-fluid {
   max-width: 50%;
   max-height: 100%;
 } 
